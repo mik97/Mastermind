@@ -4,9 +4,12 @@ public class RandomPlayer extends Player
 {
 
 	@Override
-	public void makeAction() {
-		// TODO Auto-generated method stub
+	public PlayerAction selectAction()
+	{
+		return action;
+		
 		
 	}
 
+	
 }
