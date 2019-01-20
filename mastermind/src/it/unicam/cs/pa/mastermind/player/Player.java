@@ -1,35 +1,52 @@
 package it.unicam.cs.pa.mastermind.player;
 import java.util.HashMap;
+
+import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
+import it.unicam.cs.pa.mastermind.exception.InternalException;
+import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+
 import java.awt.Desktop.Action;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 public abstract class Player
 {
    protected String playerName;
-   protected HashMap<Integer, PlayerAction> playerActionMap = new HashMap();
    protected PlayerAction action;
-   protected int mapIndex=0;
    protected Role role;
+   protected int id;
+   protected Ruleset rule;
+	// va inserito un field
+  
+   
+   
+   
+   public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
+   public abstract void init(int id, Ruleset rule);
+   
+   
+   
 
 	
 	
-   public abstract PlayerAction selectAction();
-   
-   public void  fillPlayerActionMap()
-   {
-		switch(role) 
-		{
-		 	case CODEBREACKER: 
-		 		playerActionMap.put(mapIndex, PlayerAction.INSERTCOLOR);
-		 		mapIndex++;
-		 		break;
-		 		
-		 	case CODEMAKER:
-		 		playerActionMap.put(mapIndex, PlayerAction.MAKECOMBINATION);
-			 	mapIndex++;
-		 		break;
-		}
-	 	
-   }
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
+}
+
+public Ruleset getRule() {
+	return rule;
+}
+
+public void setRule(Ruleset rule) {
+	this.rule = rule;
+}
+
 
 public String getPlayerName() {
 	return playerName;
@@ -39,13 +56,7 @@ public void setPlayerName(String playerName) {
 	this.playerName = playerName;
 }
 
-public HashMap<Integer, PlayerAction> getPlayerActionMap() {
-	return playerActionMap;
-}
 
-public void setPlayerActionMap(HashMap<Integer, PlayerAction> playerActionMap) {
-	this.playerActionMap = playerActionMap;
-}
 
 public Role getRole() {
 	return role;
@@ -58,6 +69,8 @@ public void setRole(Role role) {
 public PlayerAction getAction() {
 	return action;
 }
+
+
    
    
    

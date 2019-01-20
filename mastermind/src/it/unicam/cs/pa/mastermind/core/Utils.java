@@ -13,7 +13,7 @@ import it.unicam.cs.pa.mastermind.exception.InternalException;
 public  class Utils
 {
 
-	public static <T> T doInput(BufferedReader in, PrintStream out, String request,Predicate<T> condition, Function<String, T> function)
+	public static <T> T doInput(BufferedReader in, PrintStream out, String request, Predicate<T> condition, Function<String, T> readFun)throws InternalException
 	{
 		while (true)
 		{
@@ -27,15 +27,16 @@ public  class Utils
 			T x = null;
 			 try 
 			   {
-				x = function.apply(line);
+				x = readFun.apply(line);
 				if (!condition.test(x)) throw new Throwable("Wrong input");
 			    }catch (Throwable e)
 				     {
 				      out.println("Input Error!");
 				      continue;
 				      }
-					   return x;
-		}
+			 return x;
+					  
+		} 
 		
 	
 	

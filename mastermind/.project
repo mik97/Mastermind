@@ -3,6 +3,7 @@
 	<name>mastermind</name>
 	<comment></comment>
 	<projects>
+		<project>Mastermind</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

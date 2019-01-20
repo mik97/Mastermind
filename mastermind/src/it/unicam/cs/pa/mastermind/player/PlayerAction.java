@@ -1,10 +1,13 @@
 package it.unicam.cs.pa.mastermind.player;
 
+import it.unicam.cs.pa.mastermind.tmp.Cell;
+
 public enum PlayerAction
 {
 	INSERTCOLOR,
-	MAKECOMBINATION;
-	
+	MAKECOMBINATION,
+	ISTHECORRECTCOMBINATION;
+
 	@Override
 	public String toString() {
 
@@ -13,6 +16,8 @@ public enum PlayerAction
 			return "InsertColor";
 		case MAKECOMBINATION:
 			return "MakeCombination";
+		case ISTHECORRECTCOMBINATION:
+			return "IsTheCorrectCombination";
 		}
 		return super.name();
 	}
