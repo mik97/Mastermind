@@ -58,7 +58,3 @@ public void setRole(Role role) {
 public PlayerAction getAction() {
 	return action;
 }
-   
-   
-   
-}
