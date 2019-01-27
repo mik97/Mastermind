@@ -5,41 +5,26 @@ package it.unicam.cs.pa.mastermind.piece;
 
 import java.util.Optional;
 
-import it.unicam.cs.pa.mastermind.core.CellStatus;
-import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
-
 /**
  * @author Michele Celozzi
  *
  */
-public class Piece extends AbstractPiece {
-	
-	private int id;
-	private Color color;
-	
-	public Piece(int id, Color c)throws IllegalIdArgument {
-		if(id >= 0) {
-			this.id = id;
-		}
-		else throw new IllegalIdArgument(id);
-		
-		this.color = c;
-	}
+public class NullPiece extends AbstractPiece {
 
 	/* (non-Javadoc)
 	 * @see it.unicam.cs.pa.mastermind.piece.AbstractPiece#getColor()
 	 */
 	@Override
 	public Color getColor() {
-		return this.color;
+		return null;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see it.unicam.cs.pa.mastermind.piece.AbstractPiece#getId()
 	 */
 	@Override
 	public Optional<Integer> getId() {
-		return Optional.of(this.id);
+		return Optional.empty();
 	}
 
 	/* (non-Javadoc)
@@ -47,7 +32,7 @@ public class Piece extends AbstractPiece {
 	 */
 	@Override
 	public boolean isNull() {
-		return false;
+		return true;
 	}
 
 }

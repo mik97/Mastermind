@@ -42,7 +42,6 @@ public class Size {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "The size is: -- " + this.sizes.get(0) + " , " + this.sizes.get(1) + " --";
 	}
 }
