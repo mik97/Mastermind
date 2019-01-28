@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
+import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
@@ -58,7 +59,7 @@ public class InteractivePlayer extends Player {
 	}
 
 	@Override
-	public void init(int id, Ruleset rule) // add controllo su ID
+	public void init(int id,MatchField field, Ruleset rule) // add controllo su ID
 	{
 		this.id = id;
 		super.setRule(rule);
@@ -71,6 +72,12 @@ public class InteractivePlayer extends Player {
 	public void doAction()
 	{
 		
+		
+	}
+
+	@Override
+	public void startMatch() {
+		// TODO Auto-generated method stub
 		
 	}
 

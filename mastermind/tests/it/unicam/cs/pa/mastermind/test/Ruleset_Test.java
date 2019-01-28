@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.mastermind.JTest;
+package it.unicam.cs.pa.mastermind.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.mastermind.player;
 
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 
@@ -26,7 +27,7 @@ public class RandomPlayer extends Player
 	}
 	
 	@Override
-	public void init(int id, Ruleset rule)// meccanismo controllo id
+	public void init(int id, MatchField filed,Ruleset rule)// meccanismo controllo id
 	{
 		this.id = id;
 		super.setRule(rule);
@@ -56,6 +57,13 @@ public class RandomPlayer extends Player
 	public void doAction()
 	{
 		
+		
+	}
+
+
+	@Override
+	public void startMatch() {
+		// TODO Auto-generated method stub
 		
 	}
 

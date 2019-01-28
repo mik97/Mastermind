@@ -1,6 +1,6 @@
 package it.unicam.cs.pa.mastermind.player;
 
-<<<<<<< HEAD
+
 
 /**
  * @author luca
@@ -10,9 +10,18 @@ package it.unicam.cs.pa.mastermind.player;
 public enum TypePlayer 
 {
 	INTERACTIE,
-=======
-public enum TypePlayer {
-	INTERACTIVE,
->>>>>>> O@O
 	RANDOM;
+	
+	@Override
+	
+	public String toString() {
+
+		switch (this) {
+		case INTERACTIE:
+			return "interactive";
+		case RANDOM:
+			return "random";
+		}
+		return super.name();
+	}
 }

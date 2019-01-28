@@ -4,7 +4,7 @@ import java.util.Map;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.player.Player;
-import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
+import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
 import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
 
 /**
@@ -23,7 +23,7 @@ public final class Match {
 	private MatchField field;
 	private int firstPlayer;
 	private int currentPlayer;
-	private RuleSet referee;
+	private Ruleset referee;
 	
 	private MatchStatus status = MatchStatus.INIT;
 	

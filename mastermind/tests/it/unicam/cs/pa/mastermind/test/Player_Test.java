@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.mastermind.JTest;
+package it.unicam.cs.pa.mastermind.test;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +30,7 @@ class Player_Test
 	{
 		DefaultRuleset rule = new DefaultRuleset();
 		InteractivePlayer P1 = new InteractivePlayer("SUS",Role.CODEBREACKER);
-		P1.init(1, rule);
+		P1.init(1, null, rule);
 		P1.selectAction();
 		assertTrue(P1.getAction()!= null);
 	}
@@ -39,7 +39,7 @@ class Player_Test
 	void RandomPlayertest()
 	{	DefaultRuleset rule = new DefaultRuleset();
 		RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER);
-		P2.init(2, rule);
+		P2.init(2, null, rule);
 		P2.selectAction();
 		switch (P2.getRole()) 
 		{
