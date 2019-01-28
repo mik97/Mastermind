@@ -12,22 +12,45 @@ import org.junit.jupiter.api.Test;
 
 import it.unicam.cs.pa.mastermind.player.InteractivePlayer;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
+import it.unicam.cs.pa.mastermind.player.RandomPlayer;
 import it.unicam.cs.pa.mastermind.player.Role;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleset;
-import it.unicam.cs.pa.mastermind.tmp.*;
-class Player_Test {
+
+
+/**
+ * @author luca
+ *
+ */
+
+class Player_Test 
+{
 
 	@Test
-	void Playertest() 
+	void InteractivePlayertest() 
 	{
 		DefaultRuleset rule = new DefaultRuleset();
-		
 		InteractivePlayer P1 = new InteractivePlayer("SUS",Role.CODEBREACKER);
 		P1.init(1, rule);
 		P1.selectAction();
-		assertTrue(!P1.getRule().getPlayerActionMap().isEmpty());
 		assertTrue(P1.getAction()!= null);
+	}
+	
+	@Test
+	void RandomPlayertest()
+	{	DefaultRuleset rule = new DefaultRuleset();
+		RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER);
+		P2.init(2, rule);
+		P2.selectAction();
+		switch (P2.getRole()) 
+		{
+		case CODEBREACKER:
+			assertTrue(P2.getAction()!= null);
+			assertTrue(P2.getSecondaryAction()== null);
 		
+		case CODEMAKER:
+			assertTrue(P2.getAction()!= null);
+			assertTrue(P2.getSecondaryAction()!= null);
+		}
 		
 	}
 	

@@ -4,6 +4,12 @@ import java.util.HashMap;
 
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
+
+/**
+ * @author luca
+ *
+ */
+
 public class DefaultRuleset implements Ruleset
 {
 	public static final int fieldSize[] = {7,4};
@@ -16,22 +22,8 @@ public class DefaultRuleset implements Ruleset
 		playerActionMap.put(2, PlayerAction.ISTHECORRECTCOMBINATION);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	@Override
-	public void lineIsFull() // controlla che la riga su cui si sta lavorando non sia piena in caso lo sia fa scorrere vero la successiva.
-	{
-		
-		
-	}
-
+	
 	@Override
 	public int []getFiledSize()
 	{

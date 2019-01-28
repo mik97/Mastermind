@@ -11,6 +11,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
+/**
+ * @author luca
+ *
+ */
+
 public abstract class Player
 {
    protected String playerName;
@@ -25,8 +30,7 @@ public abstract class Player
    
    public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
    public abstract void init(int id, Ruleset rule);
-   
-   
+   public abstract void doAction();
    
 
 	
@@ -68,6 +72,7 @@ public void setRole(Role role) {
 
 public PlayerAction getAction() {
 	return action;
+<<<<<<< HEAD
 }
 
 
@@ -75,3 +80,6 @@ public PlayerAction getAction() {
    
    
 }
+=======
+}
+>>>>>>> O@O

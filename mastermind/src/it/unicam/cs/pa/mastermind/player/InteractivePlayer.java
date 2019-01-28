@@ -13,6 +13,12 @@ import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
 
+
+/**
+ * @author luca
+ *
+ */
+
 public class InteractivePlayer extends Player {
 
 
@@ -56,14 +62,16 @@ public class InteractivePlayer extends Player {
 	{
 		this.id = id;
 		super.setRule(rule);
-		
+		if(this.role == Role.CODEMAKER) this.action = PlayerAction.INSERTCOLOR;
 
 	}
-	/*
-	 * public void doAction(Cell cell) // azione prototipale { switch (this.action)
-	 * { case INSERTCOLOR: cell.setColor(Colors.GREEN); break;
-	 * 
-	 * } }
-	 **/
+	
+
+	@Override
+	public void doAction()
+	{
+		
+		
+	}
 
 }

@@ -1,11 +1,9 @@
 package it.unicam.cs.pa.mastermind.ruleSet;
 
 /**
- * @author luca
+ * @author Michele Celozzi
  *
  */
-public enum Winner 
-{
-	P1,
-	P2,
+public interface RuleSet {
+
 }

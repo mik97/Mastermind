@@ -10,6 +10,11 @@ import it.unicam.cs.pa.mastermind.exception.InternalException;
 
 
 
+/**
+ * @author luca
+ *
+ */
+
 public  class Utils
 {
 

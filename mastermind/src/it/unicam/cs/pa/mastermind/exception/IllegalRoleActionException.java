@@ -1,5 +1,11 @@
 package it.unicam.cs.pa.mastermind.exception;
 
+
+/**
+ * @author luca
+ *
+ */
+
 public class IllegalRoleActionException extends IllegalArgumentException 
 {
  public IllegalRoleActionException()

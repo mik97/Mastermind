@@ -4,10 +4,15 @@ import java.util.HashMap;
 
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
+/**
+ * @author luca
+ *
+ */
+
 public interface Ruleset 
 {
 
-public void lineIsFull();
+
 public int[] getFiledSize();
 public void SwitchColor();
 public void RemoveColor();

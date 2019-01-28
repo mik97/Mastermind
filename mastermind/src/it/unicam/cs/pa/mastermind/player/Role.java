@@ -1,5 +1,11 @@
 package it.unicam.cs.pa.mastermind.player;
 
+
+/**
+ * @author luca
+ *
+ */
+
 public enum Role
 { 
 	CODEMAKER,
