@@ -2,6 +2,7 @@ package it.unicam.cs.pa.mastermind.ruleSet;
 
 import java.util.HashMap;
 
+import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 /**
@@ -13,7 +14,7 @@ public interface Ruleset
 {
 
 
-public int[] getFiledSize();
+public Size getFiledSize();
 public void SwitchColor();
 public void RemoveColor();
 public void ConfirmInsert();

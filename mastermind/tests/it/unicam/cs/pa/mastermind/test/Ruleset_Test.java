@@ -11,11 +11,11 @@ import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleset;
 
 class Ruleset_Test
 {
-
+	DefaultRuleset rule = new DefaultRuleset();
 	@Test
-	void DefaultRuleset()
+	void getFiledSize()
 	{
-		DefaultRuleset rule = new DefaultRuleset();
+		
 	}
 
 }

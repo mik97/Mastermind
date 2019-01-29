@@ -53,18 +53,19 @@ public class RandomPlayer extends Player
 	}
 
 
-	@Override
-	public void doAction()
-	{
-		
-		
-	}
 
 
 	@Override
 	public void startMatch() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public int SelectTarget() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

@@ -10,6 +10,7 @@ import java.io.PrintStream;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Utils;
+import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
@@ -39,14 +40,14 @@ public class InteractivePlayer extends Player {
 		super.getRule().getPlayerActionMap().entrySet().forEach(i->out.println(i.getKey()+" - "+i.getValue()));
 		int y = Utils.doInput(in, out, "choose an action", this::isValidAction, Integer::parseInt);
 		try {
-			if(this.role == role.CODEBREACKER && y>0) throw new IllegalRoleActionException();
-			if(this.role == role.CODEMAKER && y<1) throw new IllegalRoleActionException();
+			if(this.role == Role.CODEBREACKER && y>0) throw new IllegalRoleActionException();
+			if(this.role == Role.CODEMAKER && y<1) throw new IllegalRoleActionException();
 			this.action = PlayerAction.values()[y];
 		    }
 		    catch (IllegalRoleActionException e)
 			{
 			 System.out.println(e.toString());
-			
+			 
 			}
 				
 				return this.action;
@@ -59,26 +60,30 @@ public class InteractivePlayer extends Player {
 	}
 
 	@Override
-	public void init(int id,MatchField field, Ruleset rule) // add controllo su ID
+	public void init(int id,MatchField field, Ruleset rule)   // add controllo su ID
 	{
 		this.id = id;
 		super.setRule(rule);
+		this.filed = field;
 		if(this.role == Role.CODEMAKER) this.action = PlayerAction.INSERTCOLOR;
 
 	}
 	
 
-	@Override
-	public void doAction()
-	{
-		
-		
-	}
 
 	@Override
-	public void startMatch() {
-		// TODO Auto-generated method stub
+	public void startMatch() 
+	{
+		System.out.println("My ID is " + this.id);
 		
+	}
+	
+	public int SelectTarget()
+	{   
+		int limit = this.filed.getColumns()-1;
+		int target = Utils.doInput(in, out, "Chose Target: between 0 - "+limit,(x)->x<= this.filed.getColumns()-1, Integer::parseInt);
+		
+		return target;
 	}
 
 }

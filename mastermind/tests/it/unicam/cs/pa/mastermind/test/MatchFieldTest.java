@@ -69,4 +69,5 @@ class MatchFieldTest {
 		
 		assertTrue(mfield.insert(piece, 0) != false);
 	}
+	
 }

@@ -2,6 +2,7 @@ package it.unicam.cs.pa.mastermind.ruleSet;
 
 import java.util.HashMap;
 
+import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 
@@ -12,7 +13,7 @@ import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 public class DefaultRuleset implements Ruleset
 {
-	public static final int fieldSize[] = {7,4};
+	public static final Size fieldSize = new Size(7,4);
 	private HashMap<Integer, PlayerAction> playerActionMap = new HashMap();
 	
 	public DefaultRuleset() 
@@ -25,7 +26,7 @@ public class DefaultRuleset implements Ruleset
 
 	
 	@Override
-	public int []getFiledSize()
+	public Size getFiledSize()
 	{
 		return fieldSize;
 		

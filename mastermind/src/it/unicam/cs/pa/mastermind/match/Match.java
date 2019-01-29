@@ -1,11 +1,20 @@
 package it.unicam.cs.pa.mastermind.match;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
+import it.unicam.cs.pa.mastermind.core.PieceFactory;
 import it.unicam.cs.pa.mastermind.player.Player;
+import it.unicam.cs.pa.mastermind.player.PlayerAction;
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
 import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
+import it.unicam.cs.pa.mastermind.piece.Color;
+import it.unicam.cs.pa.mastermind.piece.Piece;
+import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 
 /**
  * @author Michele Celozzi
@@ -23,11 +32,31 @@ public final class Match {
 	private MatchField field;
 	private int firstPlayer;
 	private int currentPlayer;
+	private int attempts;
 	private Ruleset referee;
 	
 	private MatchStatus status = MatchStatus.INIT;
 	
+	private HashMap<PlayerAction, Function<Integer, Boolean>> actions;
+	
+	private PieceFactory pieceFactory;
+	
 	private Match() {
+		actions = new HashMap<>();
+		List<AbstractPiece> pieces = new ArrayList<>();
+		
+		actions.put(PlayerAction.INSERTCOLOR, column -> {
+			for(int i = 0; i < field.getRows(); i++) {
+				Piece piece = (Piece) pieceFactory.getPiece(Color.BIANCO);
+				pieces.add(piece);
+			}
+			return field.insert(pieces, column);
+			});
+	
+		//actions.put(PlayerAction.MAKECOMBINATION, value);
+		
+		//actions.put(PlayerAction.ISTHECORRECTCOMBINATION, value);
+		
 		this.initialized = false;
 	}
 	
@@ -56,6 +85,8 @@ public final class Match {
 			
 			if(currentPlayer < 0 || currentPlayer > 1)
 				throw new IllegalArgumentException("" + currentPlayer + " is not allowed. The value of the current player must be 0 or 1! ");
+			
+			this.attempts = 0;
 			
 			this.initialized = true;
 			
@@ -88,6 +119,17 @@ public final class Match {
 	public void play() {
 		this.players[PLAYER1].startMatch();
 		this.players[PLAYER2].startMatch();
+		while(doAction(this.players[currentPlayer].selectAction()))
+			;
+	}
+	
+	private boolean doAction(PlayerAction action) 
+	{    
+		int column = this.players[currentPlayer].SelectTarget();
+		Boolean act = actions.get(action).apply(column);
+		
+		
+		return false;
 	}
 	
 	public boolean init(int player) {
@@ -99,6 +141,11 @@ public final class Match {
 			return false;
 		}
 	}
+	
+	public static int otherPlayer(int player) {
+		return (player + 1) % 2;
+	}
+	
 	
 	public MatchStatus getStatus() throws UnitializedSingleton {
 		if(!initialized)
