@@ -25,11 +25,11 @@ import it.unicam.cs.pa.mastermind.core.MatchField;
 class Player_Test 
 
 {	
-	
-	DefaultRuleset rule = new DefaultRuleset();
 	MatchField mfield = MatchField.getInstance();
+	DefaultRuleset rule = new DefaultRuleset(mfield);
+	
 	InteractivePlayer P1 = new InteractivePlayer("SUS",Role.CODEBREACKER);
-	RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER);
+	RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER, null, null);
 	
 	@Test
 	void Test_Init_InteracivePlayer() 

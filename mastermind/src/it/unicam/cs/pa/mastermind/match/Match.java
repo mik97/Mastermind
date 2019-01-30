@@ -8,6 +8,7 @@ import java.util.function.Function;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.PieceFactory;
+import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.player.Player;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
@@ -47,7 +48,7 @@ public final class Match {
 		
 		actions.put(PlayerAction.INSERTCOLOR, column -> {
 			for(int i = 0; i < field.getRows(); i++) {
-				Piece piece = (Piece) pieceFactory.getPiece(Color.BIANCO);
+				Piece piece = pieceFactory.getPiece(Color.BIANCO); // errore
 				pieces.add(piece);
 			}
 			return field.insert(pieces, column);
@@ -127,7 +128,11 @@ public final class Match {
 	{    
 		int column = this.players[currentPlayer].SelectTarget();
 		Boolean act = actions.get(action).apply(column);
-		
+		if(this.referee.LineIsFull() == true ) 
+		{
+			String choice = Utils.doInput(this.players[currentPlayer].getIn(), this.players[currentPlayer].getOut(), "Confirm your choice ? : Yes or No ", (x)->x == "Yes" || x == "No", (x)->x.substring(0,1).toUpperCase()+x.substring(1));
+			this.referee.ConfirmInsert(choice);
+		}
 		
 		return false;
 	}

@@ -26,15 +26,27 @@ public abstract class Player
    protected int id;
    protected Ruleset rule;
    protected MatchField filed;
-	// va inserito un field
-  
+	
+
+	protected BufferedReader in;
+	protected PrintStream out;
    
+	protected Player(String name,Role role,InputStream in, PrintStream out) 
+	{
+		this.playerName = name;
+		this.role=role;
+		this.in = new BufferedReader(new InputStreamReader(in));
+		this.out = out;
+	}
+
    
-   
-   public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
+
+
+
+public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
    public abstract void init(int id, MatchField filed,Ruleset rule) throws IllegalIdArgument;
    public abstract void startMatch();
-
+   public abstract int SelectTarget();
 	
 	
 public int getId() {
@@ -79,7 +91,16 @@ public PlayerAction getAction() {
 public MatchField getFiled() {
 	return filed;
 }
-public abstract int SelectTarget();
+public BufferedReader getIn()
+{
+	return in;
+}
+
+
+public PrintStream getOut() 
+{
+	return out;
+}
 
 
 }

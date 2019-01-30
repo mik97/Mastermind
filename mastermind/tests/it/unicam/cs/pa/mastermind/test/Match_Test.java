@@ -21,20 +21,25 @@ class Match_Test {
 	
 	Player p1 = new InteractivePlayer("SUS", Role.CODEBREACKER);
 	Player p2 = new InteractivePlayer("SAS", Role.CODEMAKER);
+	
 	MatchField filed = MatchField.getInstance();
+	
 	HashMap<String, Object>prop = new HashMap<String, Object>();
-	DefaultRuleset refree = new DefaultRuleset();
+	
+	DefaultRuleset refree = new DefaultRuleset(filed);
+	
 	Size size = new Size(7,4);
+	
 	@Test
 	void TestMatch()
 	{   prop.put("firstPlayer", 0);
-	 	
 		pipo.initMatch(p1, p2, prop);
-		p1.init(0, filed, refree);
+		
+		/*p1.init(0, filed, refree);
 		p2.init(1, filed, refree);
 		filed.init(size);
 		filed.topUp();
-		pipo.play();
+		pipo.play();*/
 	}
 
 }

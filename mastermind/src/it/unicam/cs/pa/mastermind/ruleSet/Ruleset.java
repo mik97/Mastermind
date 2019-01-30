@@ -17,8 +17,10 @@ public interface Ruleset
 public Size getFiledSize();
 public void SwitchColor();
 public void RemoveColor();
-public void ConfirmInsert();
-public void LineIsFull();
 public HashMap<Integer, PlayerAction> getPlayerActionMap();
 public Winner TheWinnerIs();
+public boolean  LineIsFull();
+public void NextLine();
+public boolean ConfirmInsert(String choice);
+
 }

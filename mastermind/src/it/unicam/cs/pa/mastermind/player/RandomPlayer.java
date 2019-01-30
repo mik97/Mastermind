@@ -1,6 +1,10 @@
 package it.unicam.cs.pa.mastermind.player;
 
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+
+import java.io.InputStream;
+import java.io.PrintStream;
+
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
@@ -20,10 +24,9 @@ public class RandomPlayer extends Player
 	{return action;}
 
 	
-	public  RandomPlayer(String name,Role role) 
-	{
-		this.playerName=name;
-		this.role=role;
+	public  RandomPlayer(String name,Role role,InputStream in, PrintStream out) 
+	{   super(name,role,in,out);
+		
 	}
 	
 	@Override

@@ -54,10 +54,16 @@ public class InteractivePlayer extends Player {
 
 	}
 
-	public InteractivePlayer(String name, Role role) {
-		this.playerName = name;
-		this.role = role;
+	public InteractivePlayer(String name,Role role,InputStream in, PrintStream out)
+	{  
+		super(name,role,in,out);
 	}
+	
+	public InteractivePlayer(String name,Role role) 
+	{
+		this(name, role, System.in, System.out);
+	}
+
 
 	@Override
 	public void init(int id,MatchField field, Ruleset rule)   // add controllo su ID
