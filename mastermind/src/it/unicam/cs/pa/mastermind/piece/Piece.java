@@ -5,7 +5,6 @@ package it.unicam.cs.pa.mastermind.piece;
 
 import java.util.Optional;
 
-import it.unicam.cs.pa.mastermind.core.CellStatus;
 import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 
 /**

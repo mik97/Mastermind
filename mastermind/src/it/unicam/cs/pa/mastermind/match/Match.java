@@ -1,17 +1,31 @@
 package it.unicam.cs.pa.mastermind.match;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
+import it.unicam.cs.pa.mastermind.core.PieceFactory;
+import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.player.Player;
+import it.unicam.cs.pa.mastermind.player.PlayerAction;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
+import it.unicam.cs.pa.mastermind.piece.Color;
+import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 
 /**
  * @author Michele Celozzi
  *
  */
 public final class Match {
+	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	private static PrintStream out = System.out;
 	
 	private static final Match INSTANCE = new Match();
 	private boolean initialized;
@@ -27,7 +41,26 @@ public final class Match {
 	
 	private MatchStatus status = MatchStatus.INIT;
 	
+	private HashMap<PlayerAction, Function<Integer, Boolean>> actions;
+	
+	private PieceFactory pieceFactory;
+	
 	private Match() {
+		actions = new HashMap<>();
+		List<AbstractPiece> pieces = new ArrayList<>();
+		
+		actions.put(PlayerAction.INSERTCOLOR, column -> {
+			for(int i = 0; i < field.getRows(); i++) {
+				AbstractPiece piece = pieceFactory.getPiece(Color.BIANCO);
+				pieces.add(piece);
+			}
+			return field.insert(pieces, column);
+			});
+	
+		//actions.put(PlayerAction.MAKECOMBINATION, value);
+		
+		//actions.put(PlayerAction.ISTHECORRECTCOMBINATION, value);
+		
 		this.initialized = false;
 	}
 	
@@ -37,7 +70,7 @@ public final class Match {
 	
 	
 	/**
-	 * A method to initialized the match, particurally the first player and the field
+	 * A method to initialized the match, in particular the first player and the field
 	 * @param p1 is one player
 	 * @param p2 is an other player
 	 * @param p is the hashmap that contain the {@code 'size'} that in our case is standard, 
@@ -55,8 +88,10 @@ public final class Match {
 			this.currentPlayer = this.firstPlayer;
 			
 			if(currentPlayer < 0 || currentPlayer > 1)
-				throw new IllegalArgumentException("" + currentPlayer + " is not allowed. The value of the current player must be 0 or 1! ");
+				throw new IllegalArgumentException("" + currentPlayer 
+						+ " is not allowed. The value of the current player must be 0 or 1! ");
 			
+			this.pieceFactory = PieceFactory.getInstance();
 			this.initialized = true;
 			
 			return true;
@@ -85,9 +120,38 @@ public final class Match {
 		play();		
 	}
 	
+	public void restart() {
+		this.status = MatchStatus.PLAYING;
+		this.firstPlayer = otherPlayer(currentPlayer);
+		this.currentPlayer = this.firstPlayer;
+		this.field.clear();
+		this.pieceFactory.restart();
+		start();
+	}
+	
 	public void play() {
 		this.players[PLAYER1].startMatch();
 		this.players[PLAYER2].startMatch();
+		while(doAction(this.players[currentPlayer].selectAction()))
+			;
+	}
+	
+	private boolean doAction(PlayerAction action) {
+		
+		//int column = this.players[currentPlayer].selectTarget();
+		//boolean act = actions.get(action).apply(column);
+		
+		if(isEnd())
+			return false;
+		
+		if(this.referee.lineIsFull() == true ) 
+		{
+			String choice = Utils.doInput(in, out, "Confirm your choice ? : Yes or No ", 
+					(x)->x == "Yes" || x == "No", (x)->x.substring(0,1).toUpperCase()+x.substring(1));
+			this.referee.confirmInsert(choice);
+		}
+		
+		return false;
 	}
 	
 	public boolean init(int player) {
@@ -100,6 +164,11 @@ public final class Match {
 		}
 	}
 	
+	public static int otherPlayer(int player) {
+		return (player + 1) % 2;
+	}
+	
+	
 	public MatchStatus getStatus() throws UnitializedSingleton {
 		if(!initialized)
 			throw new UnitializedSingleton("Match");
@@ -108,6 +177,20 @@ public final class Match {
 	
 	public void setStatus(MatchStatus status) {
 		this.status = status;
+	}
+	
+	private boolean isEnd() {
+		if(field.getPieces() == (field.getRows() * field.getColumns())) {
+			return false;
+		}
+		
+		win(currentPlayer);
+		return true;
+	}
+	
+	public void win(int winner){
+		this.players[winner].youWin();
+		this.players[otherPlayer(winner)].youLose();
 	}
 	
 	private <T> T getObj(Object obj, Class<? extends T> target) throws IllegalArgumentException{

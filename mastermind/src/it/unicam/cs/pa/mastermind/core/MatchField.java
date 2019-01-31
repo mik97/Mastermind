@@ -51,7 +51,7 @@ public class MatchField {
 	}
 	
 	public boolean insert(List<AbstractPiece> piece, int index)throws UnitializedSingleton {
-		initCheckup();		
+		initCheckup();
 		if(pieces <= getRows()*getColumns()) {
 			if(checkInsert(getRow(),index)) {
 				insertPiece(getCellList(getRow(),index), piece);
@@ -133,5 +133,18 @@ public class MatchField {
 	
 	public static MatchField getInstance() {
 		return INSTANCE;
+	}
+
+	public void clear() {
+		for(int i = 0; i < getRows(); i++) {
+			for(int j = 0; j < getColumns(); j++) {
+				field[i][j].pop();
+			}
+		}
+		
+	}
+
+	public int getPieces() {
+		return this.pieces;
 	}
 }

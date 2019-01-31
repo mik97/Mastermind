@@ -1,23 +1,21 @@
-/**
- * 
- */
-package it.unicam.cs.pa.mastermind.match;
+package it.unicam.cs.pa.mastermind.test;
 
 import java.util.HashMap;
 
+import org.junit.jupiter.api.Test;
+
+import it.unicam.cs.pa.mastermind.match.Match;
+import it.unicam.cs.pa.mastermind.player.InteractivePlayer;
 import it.unicam.cs.pa.mastermind.player.Player;
-import it.unicam.cs.pa.mastermind.player.RandomPlayer;
 import it.unicam.cs.pa.mastermind.player.Role;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleSet;
-/**
- * @author Michele Celozzi
- *
- */
-public class RandomMatch {
 
-	public static void main(String[] args) {
-		Player p1 = new RandomPlayer("Player1", Role.CODEMAKER);
-		Player p2 = new RandomPlayer("Player2", Role.CODEBREAKER);
+class MatchTests {
+
+	@Test
+	Match testInitMatch() {
+		Player p1 = new InteractivePlayer("P1", Role.CODEMAKER);
+		Player p2 = new InteractivePlayer("P2", Role.CODEBREAKER);
 		
 		HashMap<String, Object> prop = new HashMap<>();
 		
@@ -26,6 +24,12 @@ public class RandomMatch {
 		prop.put("firstPlayer", 0);
 		Match m = Match.getInstance();
 		m.initMatch(p1, p2, prop);
+		return m;
+	}
+	
+	@Test
+	void testStart() {
+		Match m = testInitMatch();
 		m.start();
 	}
 

@@ -56,7 +56,7 @@ class MatchFieldTest {
 	
 	@Test
 	void testInsert() {
-		List<AbstractPiece> piece = new ArrayList();
+		List<AbstractPiece> piece = new ArrayList<>();
 		Piece p1 = new Piece(0, Color.ARANCIONE);
 		Piece p2 = new Piece(1, Color.BLU);
 		Piece p3 = new Piece(0, Color.ROSSO);

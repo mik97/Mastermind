@@ -34,7 +34,17 @@ public class Cell {
 		}		
 	}
 	
+	public AbstractPiece getPiece() {
+		return this.piece;
+	}
+	
 	public void setStatus(CellStatus s) {
 		this.status = s;
+	}
+
+	public AbstractPiece pop() {
+		AbstractPiece returnPiece = getPiece();
+		this.piece = new NullPiece();
+		return returnPiece;
 	}
 }

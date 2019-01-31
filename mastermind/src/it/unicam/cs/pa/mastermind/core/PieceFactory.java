@@ -3,8 +3,8 @@
  */
 package it.unicam.cs.pa.mastermind.core;
 
-import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 import it.unicam.cs.pa.mastermind.piece.Color;
+import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 import it.unicam.cs.pa.mastermind.piece.Piece;
 
 /**
@@ -13,18 +13,23 @@ import it.unicam.cs.pa.mastermind.piece.Piece;
  */
 public class PieceFactory {
 
-	private static final PieceFactory INSTANCE = new PieceFactory();
+	private final static PieceFactory INSTANCE = new PieceFactory();
 	private int id;
 	
 	public PieceFactory() {
-		this.id = 0;
+		restart();
 	}
 	
-	public PieceFactory getInstance() {
-		return this.INSTANCE;
+	public static PieceFactory getInstance() {
+		return INSTANCE;
 	}
 	
-	public AbstractPiece getPiece(Color color) {
+	public AbstractPiece getPiece(Color color)throws IllegalArgumentException {
 		return new Piece(this.id++, color);
+	}
+
+	public void restart() {
+		this.id = 0;
+		
 	}
 }
