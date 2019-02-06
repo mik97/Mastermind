@@ -48,7 +48,7 @@ public final class Match {
 		
 		actions.put(PlayerAction.INSERTCOLOR, column -> {
 			for(int i = 0; i < field.getRows(); i++) {
-				Piece piece = pieceFactory.getPiece(Color.BIANCO); // errore
+				AbstractPiece piece = pieceFactory.getPiece(Color.BIANCO); // errore
 				pieces.add(piece);
 			}
 			return field.insert(pieces, column);
@@ -125,9 +125,8 @@ public final class Match {
 	}
 	
 	private boolean doAction(PlayerAction action) 
-	{    
-		int column = this.players[currentPlayer].SelectTarget();
-		Boolean act = actions.get(action).apply(column);
+	{  
+		
 		if(this.referee.LineIsFull() == true ) 
 		{
 			String choice = Utils.doInput(this.players[currentPlayer].getIn(), this.players[currentPlayer].getOut(), "Confirm your choice ? : Yes or No ", (x)->x == "Yes" || x == "No", (x)->x.substring(0,1).toUpperCase()+x.substring(1));

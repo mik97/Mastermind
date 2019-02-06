@@ -3,9 +3,13 @@ package it.unicam.cs.pa.mastermind.ruleSet;
 import java.util.HashMap;
 
 import it.unicam.cs.pa.mastermind.core.Cell;
+import it.unicam.cs.pa.mastermind.core.CellStatus;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.core.Utils;
+import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
+import it.unicam.cs.pa.mastermind.piece.NullPiece;
+import it.unicam.cs.pa.mastermind.piece.Piece;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 
@@ -37,19 +41,27 @@ public class DefaultRuleset implements Ruleset
 		return fieldSize;
 		
 	}
-
 	@Override
-	public void SwitchColor()// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
+	public void SwitchColor(int posIn,int posFin)// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
 	{
+		Cell[] cell = this.field.getRow().get(currentLine);
 		
+		AbstractPiece a = cell[posIn].getPiece();
+		AbstractPiece b = cell[posFin].getPiece();
 		
+		cell[posIn].pop();
+		cell[posFin].pop();
+		
+		cell[posIn].setPiece(b);
+		cell[posFin].setPiece(a);
 	}
 
 	@Override
-	public void RemoveColor()//utile si in caso di errore di inserimento.
+	public void RemoveColor(int Target)//utile si in caso di errore di inserimento.
 	{
-		
-		
+		Cell[] cell = this.field.getRow().get(currentLine);
+		cell[Target].pop();
+		//reinserimento pezzo.
 	}
 
 	@Override
@@ -59,11 +71,13 @@ public class DefaultRuleset implements Ruleset
 		{
 		case "Yes":
 			System.out.println("Your turn is end");
-			return true;
+			return false;
 			
 
 		case "No":
-			
+		System.out.println();
+		return true;
+			 
 		}
 		return false;
 
@@ -71,15 +85,6 @@ public class DefaultRuleset implements Ruleset
 	}
 
 	
-	
-
-
-	@Override
-	public Winner TheWinnerIs() 
-	{
-	
-		return null;
-	}
 
 
 	public boolean LineIsFull() //controlla se la riga è piena, quando è piena seleziona la riga sucessiva.
@@ -88,7 +93,7 @@ public class DefaultRuleset implements Ruleset
 		Cell[] cell=field.getRow().get(currentLine);
 		for(int i = 0;i<field.getColumns();i++)
 		{   
-			if(cell[i].isEmpty() == false)	counter++;
+			if(cell[i].getStatus() == CellStatus.FULL)	counter++;
 			
 		}
 		if(counter == field.getColumns())

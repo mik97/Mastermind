@@ -24,7 +24,7 @@ public class PieceFactory {
 		return INSTANCE;
 	}
 	
-	public Piece getPiece(Color color)throws IllegalArgumentException {
+	public AbstractPiece getPiece(Color color)throws IllegalArgumentException {
 		return new Piece(this.id++, color);
 	}
 

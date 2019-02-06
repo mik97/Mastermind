@@ -18,7 +18,7 @@ import java.io.PrintStream;
  *
  */
 
-public abstract class Player
+public abstract class Player 
 {
    protected String playerName;
    protected PlayerAction action;

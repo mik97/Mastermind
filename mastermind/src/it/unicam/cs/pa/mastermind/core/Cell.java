@@ -24,6 +24,16 @@ public class Cell {
 	public boolean isEmpty() {
 		return this.piece.isNull();
 	}
+	public AbstractPiece pop() {
+	    AbstractPiece returnPiece = getPiece();
+	    this.piece = new NullPiece();
+	    return returnPiece;
+	  }
+	
+	public AbstractPiece getPiece() 
+	{
+	    return this.piece;
+	}
 	
 	public boolean setPiece(AbstractPiece piece) {
 		if(!this.piece.isNull()) {

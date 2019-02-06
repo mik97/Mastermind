@@ -15,12 +15,12 @@ public interface Ruleset
 
 
 public Size getFiledSize();
-public void SwitchColor();
-public void RemoveColor();
 public HashMap<Integer, PlayerAction> getPlayerActionMap();
-public Winner TheWinnerIs();
 public boolean  LineIsFull();
 public void NextLine();
 public boolean ConfirmInsert(String choice);
+public void SwitchColor(int posIn, int posFin);
+public void RemoveColor(int Target);
+
 
 }

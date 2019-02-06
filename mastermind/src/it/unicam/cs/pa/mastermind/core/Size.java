@@ -28,6 +28,8 @@ public class Size {
 		this(new Integer[] {row, column});
 	}
 	
+	
+
 	public List<Integer> getSize() {
 		return this.sizes;
 	}
