@@ -64,6 +64,13 @@ public class AlternativeRuleset implements Ruleset
 		
 		
 	}
+
+	@Override
+	public int getCurrentLine() 
+	{
+	
+		return 0;
+	}
 	
 	
 }

@@ -14,13 +14,14 @@ public interface Ruleset
 {
 
 
-public Size getFiledSize();
-public HashMap<Integer, PlayerAction> getPlayerActionMap();
-public boolean  LineIsFull();
-public void NextLine();
-public boolean ConfirmInsert(String choice);
-public void SwitchColor(int posIn, int posFin);
-public void RemoveColor(int Target);
+public abstract int getCurrentLine();
+public abstract Size getFiledSize();
+public abstract HashMap<Integer, PlayerAction> getPlayerActionMap();
+public  abstract boolean  LineIsFull();
+public abstract void NextLine();
+public abstract boolean ConfirmInsert(String choice);
+public abstract void SwitchColor(int posIn, int posFin);
+public abstract void RemoveColor(int Target);
 
 
 }

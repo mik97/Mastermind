@@ -20,7 +20,7 @@ import it.unicam.cs.pa.mastermind.piece.Piece;
  * @author Michele Celozzi
  *
  */
-class MatchFieldTest {
+class MatchField_Test {
 	
 	MatchField mfield = MatchField.getInstance();
 	Size size = new Size(7,4);

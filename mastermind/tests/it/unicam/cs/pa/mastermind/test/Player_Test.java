@@ -28,13 +28,15 @@ class Player_Test
 	MatchField mfield = MatchField.getInstance();
 	DefaultRuleset rule = new DefaultRuleset(mfield);
 	
+	
 	InteractivePlayer P1 = new InteractivePlayer("SUS",Role.CODEBREACKER);
-	RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER, null, null);
+	RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER);
 	
 	@Test
 	void Test_Init_InteracivePlayer() 
-	{
-		P1.init(1, null, rule);
+	{	
+		mfield.init(rule.getFiledSize());
+		P1.init(1, mfield,rule);
 		assertTrue(P1.getRule() != null);
 		assertTrue(P1.getId()!=0);
 	}
@@ -50,9 +52,11 @@ class Player_Test
 	@Test
 	void Test_Init_RandomPlayer()
 	{	
-		P2.init(2, null, rule);
+		mfield.init(rule.getFiledSize());
+		P2.init(2, mfield, rule);
 		assertTrue(P2.getRule() != null);
 		assertTrue(P2.getId()!=0);
+		
 	}
 
 	@Test
@@ -80,6 +84,13 @@ class Player_Test
 			assertTrue(P2.getAction()!= null);
 			assertTrue(P2.getSecondaryAction()!= null);
 		}
+	}
+	@Test
+	void Test_RandomPlayer_MakeComb()
+	{
+		Test_Init_RandomPlayer();
+		P2.makeComb();
+		assertTrue(P2.getCodeMakerCombination() != null);
 	}
 	
 	

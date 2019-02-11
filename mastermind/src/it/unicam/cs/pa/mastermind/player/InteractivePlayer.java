@@ -8,11 +8,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
+import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
+import it.unicam.cs.pa.mastermind.piece.Color;
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
 
 
@@ -90,6 +92,33 @@ public class InteractivePlayer extends Player {
 		int target = Utils.doInput(in, out, "Chose Target: between 0 - "+limit,(x)->x<= this.filed.getColumns()-1, Integer::parseInt);
 		
 		return target;
+	}
+
+	@Override
+	public boolean isTheCorrectCombination() 
+	{
+		if(this.CodeMakerCombination == filed.getRow().get(rule.getCurrentLine()))
+		{
+			System.out.println("they are the same combination\n"+"Combo CodeMacker: "+this.CodeMakerCombination+"\n"+"Combo CodeBreacker: "+
+					filed.getRow().get(rule.getCurrentLine()));
+			return true;
+		}
+		else
+		{	Cell c[] = filed.getRow().get(rule.getCurrentLine());
+			int correct = 0;
+			int inPosition = 0;
+			for(int i = 0 ; i<filed.getRows();i++)
+			{
+				//if()
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void makeComb() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

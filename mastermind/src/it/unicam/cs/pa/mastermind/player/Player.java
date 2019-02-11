@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.mastermind.player;
 import java.util.HashMap;
 
+import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
@@ -26,16 +27,19 @@ public abstract class Player
    protected int id;
    protected Ruleset rule;
    protected MatchField filed;
+   protected Cell CodeMakerCombination [];
+	protected BufferedReader in ;
+	
 	
 
-	protected BufferedReader in;
+
 	protected PrintStream out;
    
 	protected Player(String name,Role role,InputStream in, PrintStream out) 
 	{
 		this.playerName = name;
-		this.role=role;
 		this.in = new BufferedReader(new InputStreamReader(in));
+		this.role=role;
 		this.out = out;
 	}
 
@@ -47,31 +51,38 @@ public abstract PlayerAction selectAction() throws InternalException, IllegalRol
    public abstract void init(int id, MatchField filed,Ruleset rule) throws IllegalIdArgument;
    public abstract void startMatch();
    public abstract int SelectTarget();
+   public abstract  boolean isTheCorrectCombination();
+   public abstract void  makeComb();
 	
-	
-public int getId() {
-	return id;
-}
+
 
 public void setId(int id) {
 	this.id = id;
 }
 
-public Ruleset getRule() {
-	return rule;
+public void setRole(Role role) 
+{
+	this.role = role;
 }
 
 public void setRule(Ruleset rule) {
 	this.rule = rule;
 }
 
+public void setPlayerName(String playerName) {
+	this.playerName = playerName;
+}
+
+public int getId() {
+	return id;
+}
+
+public Ruleset getRule() {
+	return rule;
+}
 
 public String getPlayerName() {
 	return playerName;
-}
-
-public void setPlayerName(String playerName) {
-	this.playerName = playerName;
 }
 
 
@@ -80,9 +91,6 @@ public Role getRole() {
 	return role;
 }
 
-public void setRole(Role role) {
-	this.role = role;
-}
 
 public PlayerAction getAction() {
 	return action;
@@ -100,6 +108,10 @@ public BufferedReader getIn()
 public PrintStream getOut() 
 {
 	return out;
+}
+public Cell[] getCodeMakerCombination() 
+{
+	return CodeMakerCombination;
 }
 
 
