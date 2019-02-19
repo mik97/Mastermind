@@ -21,21 +21,21 @@ public enum Color {
 	public String toString() {
 		switch(this) {
 		case BIANCO: 
-			return "Bianco";
+			return "W";
 		case GIALLO: 
-			return "Giallo";
+			return "G";
 		case ROSSO: 
-			return "Rosso";
+			return "R";
 		case ARANCIONE: 
-			return "Arancione";
+			return "A";
 		case BLU: 
-			return "Blu";
+			return "B";
 		case MARRONE: 
-			return "Marrone";
+			return "M";
 		case VIOLA: 
-			return "Viola";
+			return "V";
 		case NERO: 
-			return "Nero";
+			return "N";
 		}
 		
 		return super.name();

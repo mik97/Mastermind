@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.List;
 
 import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
@@ -18,6 +20,7 @@ import it.unicam.cs.pa.mastermind.piece.Color;
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
 
 
+
 /**
  * @author luca
  *
@@ -25,24 +28,32 @@ import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
 
 public class InteractivePlayer extends Player {
 
-
-	private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	private PrintStream out = System.out;
-
-	private boolean isValidAction(int V) {
+	/**
+	 * check if the action is existing{@code true}  return true {@code false } return false
+	 * @param V
+	 * @return
+	 */
+	private boolean isValidAction(int V) 
+	{
 		if (this.getRule().getPlayerActionMap().get(V) != null)
 			return true;
 		else
 			return false;
 
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see it.unicam.cs.pa.mastermind.player.Player#selectAction()
+	 */
+	
 	public PlayerAction selectAction() throws InternalException,IllegalRoleActionException{
-		System.out.println("Available Actions:\n");
+		System.out.println("\nAvailable Actions:\n");
 		super.getRule().getPlayerActionMap().entrySet().forEach(i->out.println(i.getKey()+" - "+i.getValue()));
-		int y = Utils.doInput(in, out, "choose an action", this::isValidAction, Integer::parseInt);
+		int y = Utils.doInput(in, out, "\nchoose an action", this::isValidAction, Integer::parseInt);
 		try {
-			if(this.role == Role.CODEBREACKER && y>0) throw new IllegalRoleActionException();
+			if(this.role == Role.CODEBREAKER && y>0) throw new IllegalRoleActionException();
 			if(this.role == Role.CODEMAKER && y<1) throw new IllegalRoleActionException();
 			this.action = PlayerAction.values()[y];
 		    }
@@ -67,8 +78,13 @@ public class InteractivePlayer extends Player {
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see it.unicam.cs.pa.mastermind.player.Player#init()
+	 */
 	@Override
-	public void init(int id,MatchField field, Ruleset rule)   // add controllo su ID
+	public void init(int id,MatchField field, Ruleset rule)  throws IllegalIdArgument
 	{
 		this.id = id;
 		super.setRule(rule);
@@ -78,7 +94,12 @@ public class InteractivePlayer extends Player {
 	}
 	
 
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see it.unicam.cs.pa.mastermind.player.Player#startMatch()
+	 */
+	
 	@Override
 	public void startMatch() 
 	{
@@ -86,38 +107,50 @@ public class InteractivePlayer extends Player {
 		
 	}
 	
-	public int SelectTarget()
+	/*public int SelectTarget()
 	{   
 		int limit = this.filed.getColumns()-1;
 		int target = Utils.doInput(in, out, "Chose Target: between 0 - "+limit,(x)->x<= this.filed.getColumns()-1, Integer::parseInt);
 		
 		return target;
-	}
+	}*/
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 *@see it.unicam.cs.pa.mastermind.player.Player#isTheCorrectCombination()
+	 */
+	
 	@Override
-	public boolean isTheCorrectCombination() 
+	public boolean isTheCorrectCombination(String choice) 
 	{
-		if(this.CodeMakerCombination == filed.getRow().get(rule.getCurrentLine()))
+		
+		
+		switch (choice) 
 		{
-			System.out.println("they are the same combination\n"+"Combo CodeMacker: "+this.CodeMakerCombination+"\n"+"Combo CodeBreacker: "+
-					filed.getRow().get(rule.getCurrentLine()));
+		
+		case "Yes":
 			return true;
-		}
-		else
-		{	Cell c[] = filed.getRow().get(rule.getCurrentLine());
-			int correct = 0;
-			int inPosition = 0;
-			for(int i = 0 ; i<filed.getRows();i++)
-			{
-				//if()
-			}
+	
+				
+				
+		case "No":
+				return false;
+			
 		}
 		return false;
-	}
+}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 *@see it.unicam.cs.pa.mastermind.player.Player#makeComb()
+	 */
+	
 	@Override
-	public void makeComb() {
-		// TODO Auto-generated method stub
+	public void makeComb() 
+	{
+		
 		
 	}
 

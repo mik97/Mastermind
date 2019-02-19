@@ -29,8 +29,10 @@ class Player_Test
 	DefaultRuleset rule = new DefaultRuleset(mfield);
 	
 	
-	InteractivePlayer P1 = new InteractivePlayer("SUS",Role.CODEBREACKER);
+	InteractivePlayer P1 = new InteractivePlayer("SUS",Role.CODEBREAKER);
 	RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER);
+	
+	
 	
 	@Test
 	void Test_Init_InteracivePlayer() 
@@ -47,6 +49,13 @@ class Player_Test
 	{	Test_Init_InteracivePlayer();
 		P1.selectAction();
 		assertTrue(P1.getAction()!= null);
+	}
+	
+	@Test
+	void Test_isTheCorrectCombination_InteracivePlayer() 
+	{
+		Test_Init_InteracivePlayer();
+		assertTrue(P1.isTheCorrectCombination("Yes"));
 	}
 	
 	@Test
@@ -76,7 +85,7 @@ class Player_Test
 		
 		switch (P2.getRole()) 
 		{
-		case CODEBREACKER:
+		case CODEBREAKER:
 			assertTrue(P2.getAction()!= null);
 			assertTrue(P2.getSecondaryAction()== null);
 		

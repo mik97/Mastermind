@@ -19,7 +19,7 @@ class Match_Test {
 
 	Match pipo = Match.getInstance();
 	
-	Player p1 = new InteractivePlayer("SUS", Role.CODEBREACKER);
+	Player p1 = new InteractivePlayer("SUS", Role.CODEBREAKER);
 	Player p2 = new InteractivePlayer("SAS", Role.CODEMAKER);
 	
 	MatchField filed = MatchField.getInstance();
@@ -32,7 +32,9 @@ class Match_Test {
 	
 	@Test
 	void TestMatch()
-	{   prop.put("firstPlayer", 0);
+	{   
+		
+		prop.put("firstPlayer", 0);
 		pipo.initMatch(p1, p2, prop);
 		
 		/*p1.init(0, filed, refree);

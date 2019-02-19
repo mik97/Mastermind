@@ -9,9 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
+import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 import it.unicam.cs.pa.mastermind.piece.Color;
 import it.unicam.cs.pa.mastermind.piece.Piece;
+import it.unicam.cs.pa.mastermind.ruleSet.AlternativeRuleset;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleset;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleFactory;
 import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
@@ -22,18 +24,20 @@ import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
  */
 
 class Ruleset_Test
+
 {	MatchField filed = MatchField.getInstance();
 	DefaultRuleset rule = new DefaultRuleset(filed);
-	RuleFactory factory = new RuleFactory();
+	RuleFactory factory = new RuleFactory(new Size(7,6),"Alternative",filed);
+	
 	@Test
-	void ConfirmInsert()
+	void Test_ConfirmInsert_DefaultRuleset()
 	{
 		filed.init(rule.getFiledSize());
 		assertFalse(rule.ConfirmInsert("Yes"));
 	}
 
 	@Test
-	void LineIsFull()
+	void Test_LineIsFull_DefaultRuleset()
 	{	filed.init(rule.getFiledSize());
 	
 		List<AbstractPiece> piece = new ArrayList();
@@ -52,35 +56,34 @@ class Ruleset_Test
 	}
 	
 	@Test
-	void NextLine()
+	void Test_NextLine_DefaultRuleset()
 	{
-		LineIsFull();
+		Test_LineIsFull_DefaultRuleset();
 		rule.NextLine();
 		assertTrue(rule.LineIsFull() == false);
 	}
 	@Test
-	void RemovreColor()
+	void Test_RemovreColor_DefaultRuleset()
 	{ 
-		LineIsFull();
-		rule.RemoveColor(3);
+		Test_LineIsFull_DefaultRuleset();
+		rule.Remove(3);
 		assertTrue(rule.LineIsFull());
 	}
 	
 	@Test
-	void SwitchColor()
+	void Test_Switch_DefaultRuleset()
 	{ 
-		LineIsFull();
-		rule.SwitchColor(0, 2);
+		Test_LineIsFull_DefaultRuleset();
+		rule.Switch(0, 2);
 		Cell[] cell = rule.field.getRow().get(rule.getCurrentLine());
 		assertTrue(cell[0].getPiece().getColor() == Color.ROSSO && cell[2].getPiece().getColor() == Color.ARANCIONE);
 	}
 	@Test
-	void RuleFactory()
+	void Test_RuleFactory_DefaultRuleset()
 	{
-		Ruleset RuR = factory.getRule("Default");
-		Ruleset RaR = factory.getRule("Alternative");
-		assertTrue(RuR.getClass().equals(rule.getClass()));
-		assertTrue(RaR.getClass().equals(factory.getRule("Alternative").getClass()));
+		Ruleset RuR = factory.getRule();
+		assertTrue(RuR.getClass().equals(new AlternativeRuleset(RuR.getFiledSize(), null).getClass()));
+		assertTrue(RuR.getFiledSize().getRow() >=7 && RuR.getFiledSize().getColumn() >=4);
 	}
 	
 }

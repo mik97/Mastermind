@@ -5,6 +5,7 @@ import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Random;
@@ -42,15 +43,20 @@ public class RandomPlayer extends Player
 		this(name, role, System.in, System.out);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see it.unicam.cs.pa.mastermind.player.Player#init()
+	 */
 	@Override
-	public void init(int id, MatchField filed,Ruleset rule) throws IllegalIdArgument	// meccanismo controllo id
+	public void init(int id, MatchField filed,Ruleset rule) throws IllegalIdArgument	
 	{
 		this.id = id;
 		super.setRule(rule);
 		this.filed=filed;
 		
 		switch (role) {
-		case CODEBREACKER:
+		case CODEBREAKER:
 			action=rule.getPlayerActionMap().get(0);
 			secondaryAction=null;
 			break;
@@ -72,35 +78,51 @@ public class RandomPlayer extends Player
 
 
 
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see it.unicam.cs.pa.mastermind.player.Player#startMatch()
+	 */
 	@Override
-	public void startMatch() {
-		// TODO Auto-generated method stub
+	public void startMatch() 
+	{
+		
 		
 	}
 
 
-	@Override
+	/*@Override
 	public int SelectTarget() 
 	{
 		
 		return 0;
-	}
+	}*/
 
 
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see it.unicam.cs.pa.mastermind.player.Player#isTheCorrectCombination()
+	 */
 	@Override
-	public boolean isTheCorrectCombination()
+	public boolean isTheCorrectCombination(String choice)
 	{
 		return false;
 		
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see it.unicam.cs.pa.mastermind.player.Player#makeComb()
+	 */
 	@Override
 	public void makeComb() 
 	{  
 		Cell [] combination = new Cell[filed.getColumns()];
-		java.util.List<Color>color= Arrays.asList(Color.values());
+		List<Color>color= Arrays.asList(Color.values());
 		Random rand = new Random();
 		Color a = null;
 		

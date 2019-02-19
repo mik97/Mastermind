@@ -46,12 +46,37 @@ public abstract class Player
    
 
 
-
+/**
+ * allows you to choose one of the possible actions
+ * @return
+ * @throws InternalException
+ * @throws IllegalRoleActionException
+ */
 public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
+
+	/**
+	 * initialize the player
+	 * @param id
+	 * @param filed
+	 * @param rule
+	 * @throws IllegalIdArgument
+	 */
    public abstract void init(int id, MatchField filed,Ruleset rule) throws IllegalIdArgument;
+   /**
+    * Initialize match's parameters
+    */
    public abstract void startMatch();
-   public abstract int SelectTarget();
-   public abstract  boolean isTheCorrectCombination();
+   
+   //public abstract int SelectTarget();
+   /**
+    * check if the inserted combination is correct
+    * @param choice
+    * @return
+    */
+   public abstract  boolean isTheCorrectCombination(String choice);
+   /**
+    * creates the combination that will be resolved
+    */
    public abstract void  makeComb();
 	
 

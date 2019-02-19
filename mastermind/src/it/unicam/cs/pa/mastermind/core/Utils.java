@@ -3,6 +3,7 @@ package it.unicam.cs.pa.mastermind.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -17,7 +18,16 @@ import it.unicam.cs.pa.mastermind.exception.InternalException;
 
 public  class Utils
 {
-
+	/**
+	 * 
+	 * @param in
+	 * @param out
+	 * @param request
+	 * @param condition
+	 * @param readFun
+	 * @return
+	 * @throws InternalException
+	 */
 	public static <T> T doInput(BufferedReader in, PrintStream out, String request, Predicate<T> condition, Function<String, T> readFun)throws InternalException
 	{
 		while (true)
@@ -43,16 +53,7 @@ public  class Utils
 					  
 		} 
 		
-	
-	
-	
-	
-	
-	
 	}
-	
-	
-	
 	
 	
 	

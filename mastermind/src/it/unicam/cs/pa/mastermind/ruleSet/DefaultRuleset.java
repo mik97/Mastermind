@@ -24,6 +24,7 @@ public class DefaultRuleset implements Ruleset
 	private HashMap<Integer, PlayerAction> playerActionMap = new HashMap();
 	public MatchField field;
 	private int currentLine = 6;
+	
 	public DefaultRuleset(MatchField field) 
 	{
 		playerActionMap.put(0, PlayerAction.INSERTCOLOR);
@@ -42,27 +43,35 @@ public class DefaultRuleset implements Ruleset
 		
 	}
 	@Override
-	public void SwitchColor(int posIn,int posFin)// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
+	public void Switch(int posIn,int posFin)// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
 	{
 		Cell[] cell = this.field.getRow().get(currentLine);
 		
-		AbstractPiece a = cell[posIn].getPiece();
-		AbstractPiece b = cell[posFin].getPiece();
+		AbstractPiece a ;
+		AbstractPiece b;
 		
-		cell[posIn].pop();
-		cell[posFin].pop();
+		a=cell[posIn].pop();
+		b=cell[posFin].pop();
 		
 		cell[posIn].setPiece(b);
 		cell[posFin].setPiece(a);
 	}
 
 	@Override
-	public void RemoveColor(int Target)//utile si in caso di errore di inserimento.
+	public void Remove(int Target)	
 	{
 		Cell[] cell = this.field.getRow().get(currentLine);
 		cell[Target].pop();
-		//reinserimento pezzo.
+		
 	}
+	
+	public void Remove(int Target,Piece newPiece)//utile si in caso di errore di inserimento.
+	{
+		Cell[] cell = this.field.getRow().get(currentLine);
+		cell[Target].pop();
+		cell[Target].setPiece(newPiece);
+	}
+
 
 	@Override
 	public boolean ConfirmInsert(String choice)//una volta inserita la combinazione chiede conferma in caso di risposta neativa mostra le cose possibili da fare.
@@ -108,7 +117,7 @@ public class DefaultRuleset implements Ruleset
 	@Override
 	public void NextLine()
 	{
-		if(this.currentLine <0) System.out.println("The game is end"); // possibile richiamo al metodo the winner is...
+		if(this.currentLine <0) System.out.println("The game is end"); 
 		else this.currentLine--;
 		
 	}

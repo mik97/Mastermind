@@ -9,7 +9,7 @@ package it.unicam.cs.pa.mastermind.player;
 public enum Role
 { 
 	CODEMAKER,
-	CODEBREACKER;
+	CODEBREAKER;
 	
 	@Override
 	public String toString() {
@@ -17,8 +17,8 @@ public enum Role
 		switch (this) {
 		case CODEMAKER:
 			return "CodeMaker";
-		case CODEBREACKER:
-			return "CodeBreacker";
+		case CODEBREAKER:
+			return "CodeBreaker";
 		}
 		return super.name();
 	}

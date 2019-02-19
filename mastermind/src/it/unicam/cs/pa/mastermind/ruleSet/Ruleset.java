@@ -20,8 +20,8 @@ public abstract HashMap<Integer, PlayerAction> getPlayerActionMap();
 public  abstract boolean  LineIsFull();
 public abstract void NextLine();
 public abstract boolean ConfirmInsert(String choice);
-public abstract void SwitchColor(int posIn, int posFin);
-public abstract void RemoveColor(int Target);
+public abstract void Switch(int posIn, int posFin);
+public abstract void Remove(int Target);
 
 
 }

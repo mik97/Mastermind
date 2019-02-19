@@ -3,16 +3,19 @@ package it.unicam.cs.pa.mastermind.ruleSet;
 import java.util.HashMap;
 import java.util.List;
 
+import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 public class AlternativeRuleset implements Ruleset
 {
 	public static Size fieldSize;
+	public MatchField field;
+	
 	
 	@Override
 	public Size getFiledSize() {
-		// TODO Auto-generated method stub
+		
 		return fieldSize;
 	}
 
@@ -41,27 +44,28 @@ public class AlternativeRuleset implements Ruleset
 	}
 
 	@Override
-	public void SwitchColor(int posIn, int posFin) {
+	public void Switch(int posIn, int posFin) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void RemoveColor(int Target)
+	public void Remove(int Target)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 	
-	private void checkSize(Size fieldSize) 
+	private boolean checkSize(Size fieldSize) 
 	{
-		
+		if(fieldSize.getColumn() >= 4) return true;
+		else return false;
 	}
 	
-	public AlternativeRuleset(int fRow,int fColumn)
+	public AlternativeRuleset(Size size,MatchField field)
 	{
-		if(fColumn>=4) AlternativeRuleset.fieldSize = new  Size(fRow, fColumn);
-		
+		 if(checkSize(size))fieldSize = size;
+		 this.field = field;
 		
 	}
 
