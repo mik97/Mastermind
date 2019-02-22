@@ -33,14 +33,6 @@ public class InteractivePlayer extends Player {
 	 * @param V
 	 * @return
 	 */
-	private boolean isValidAction(int V) 
-	{
-		if (this.getRule().getPlayerActionMap().get(V) != null)
-			return true;
-		else
-			return false;
-
-	}
 	
 	/*
 	 * (non-Javadoc)
@@ -51,7 +43,7 @@ public class InteractivePlayer extends Player {
 	public PlayerAction selectAction() throws InternalException,IllegalRoleActionException{
 		System.out.println("\nAvailable Actions:\n");
 		super.getRule().getPlayerActionMap().entrySet().forEach(i->out.println(i.getKey()+" - "+i.getValue()));
-		int y = Utils.doInput(in, out, "\nchoose an action", this::isValidAction, Integer::parseInt);
+		int y = Utils.doInput(in, out, "\nchoose an action", this.rule::isValidAction, Integer::parseInt);
 		try {
 			if(this.role == Role.CODEBREAKER && y>0) throw new IllegalRoleActionException();
 			if(this.role == Role.CODEMAKER && y<1) throw new IllegalRoleActionException();

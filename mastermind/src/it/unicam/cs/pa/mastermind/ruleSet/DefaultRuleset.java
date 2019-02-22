@@ -122,6 +122,16 @@ public class DefaultRuleset implements Ruleset
 		
 	}
 
+	
+	public boolean isValidAction(int V) 
+	{
+		if (this.playerActionMap.get(V) != null)
+			return true;
+		else
+			return false;
+
+	}
+	
 	public int getCurrentLine()
 	{
 		return currentLine;

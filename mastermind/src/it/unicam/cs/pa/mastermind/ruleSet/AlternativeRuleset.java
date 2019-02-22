@@ -75,6 +75,12 @@ public class AlternativeRuleset implements Ruleset
 	
 		return 0;
 	}
+
+	@Override
+	public boolean isValidAction(int V) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }

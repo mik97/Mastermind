@@ -22,6 +22,7 @@ public abstract void NextLine();
 public abstract boolean ConfirmInsert(String choice);
 public abstract void Switch(int posIn, int posFin);
 public abstract void Remove(int Target);
+public  abstract boolean isValidAction(int V) ;
 
 
 }
