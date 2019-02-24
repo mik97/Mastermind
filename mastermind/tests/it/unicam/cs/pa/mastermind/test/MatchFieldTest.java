@@ -1,6 +1,3 @@
-/**
- * 
- */
 package it.unicam.cs.pa.mastermind.test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +19,7 @@ import it.unicam.cs.pa.mastermind.piece.Piece;
  */
 class MatchFieldTest {
 	
-	MatchField mfield = MatchField.getInstance();
+	MatchField mfield = new MatchField();
 	Size size = new Size(7,4);
 	
 	@Test
@@ -67,6 +64,6 @@ class MatchFieldTest {
 		piece.add(p3);
 		piece.add(p4);
 		
-		assertTrue(mfield.insert(piece, 0) != false);
+		assertTrue(mfield.insert(piece) != false);
 	}
 }
