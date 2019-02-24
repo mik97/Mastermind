@@ -12,15 +12,13 @@ import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
  */
 public class MatchField {
 
-	private static final MatchField INSTANCE = new MatchField();
 	private boolean initialized;
-	public UnitializedSingleton exc = new UnitializedSingleton("MatchField");
 	
 	private Cell field[][];
 	private Size size;
 	private int pieces;
 	
-	private MatchField() {
+	public MatchField() {
 		this.initialized = false;
 	}
 	
@@ -44,17 +42,17 @@ public class MatchField {
 		}
 	}
 	
-	public void setPieces() throws UnitializedSingleton {
+	public void setPieces(){
 		initCheckup();
 		long empty = getEmptyCells().stream().filter(cell -> cell.isEmpty()).count();
 		pieces += empty;
 	}
 	
-	public boolean insert(List<AbstractPiece> piece, int index)throws UnitializedSingleton {
+	public boolean insert(List<AbstractPiece> piece) {
 		initCheckup();
 		if(pieces <= getRows()*getColumns()) {
-			if(checkInsert(getRow(),index)) {
-				insertPiece(getCellList(getRow(),index), piece);
+			if(checkInsert(getCellList(), getRow())) {
+				insertPiece(getCellList(), piece);
 				return true;
 			}
 			return false;
@@ -63,9 +61,8 @@ public class MatchField {
 		return false;
 	}
 	
-	private void initCheckup()throws UnitializedSingleton {
-		if(!initialized)
-			throw exc;
+	private boolean initCheckup() {
+		return this.initialized;
 	}
 	
 	public int getRows() {
@@ -90,11 +87,11 @@ public class MatchField {
 		return cell;
 	}
 	
-	public List<Cell[]> getRow() {
-		List<Cell[]> cells = new ArrayList<>();
+	public List<Cell> getCellList() {
+		List<Cell> cells = new ArrayList<>();
 		
-		for(int i = 0; i < getRows(); i++) {
-			cells.add(this.field[i]);
+		for(int i = 0; i < getColumns(); i++) {
+			cells.add(field[getRow()][i]);
 		}		
 		
 		return cells;
@@ -108,12 +105,20 @@ public class MatchField {
 			
 			cell.stream().forEach(cel -> cel.setStatus(CellStatus.FULL));
 		}
+		
+		this.setCellInField(cell);
 	}
 	
-	public boolean checkInsert(List<Cell[]> cell, int i) {
-		List<Cell> cells = getCellList(cell, i);
+	private void setCellInField(List<Cell> cells) {
+		for(int i = 0; i < getColumns(); i++) {
+			field[getRow()][i] = cells.get(i);
+		}
+	}
+	
+	public boolean checkInsert(List<Cell> cell, int i) {
+//		List<Cell> cells = getCellList(cell, i);
 		
-		if(cells.stream().filter(emptyCell -> emptyCell.isEmpty()).count() == getColumns()) {
+		if(cell.stream().filter(emptyCell -> emptyCell.isEmpty()).count() == getColumns()) {
 			return true;
 		}
 		
@@ -121,19 +126,15 @@ public class MatchField {
 		
 	}
 	
-	public List<Cell> getCellList(List<Cell[]> cell, int i){
-		List<Cell> cells = new ArrayList<>();
-
-		for(int x = 0; x < getColumns(); x++) {
-			cells.add(cell.get(i)[x]);
-		}
-		
-		return cells;
-	}
-	
-	public static MatchField getInstance() {
-		return INSTANCE;
-	}
+//	public List<Cell> getCellList(List<Cell> cell, int i){
+//		List<Cell> cells = new ArrayList<>();
+//
+//		for(int x = 0; x < getColumns(); x++) {
+//			cells.add(cell.get(i)[x]);
+//		}
+//		
+//		return cells;
+//	}
 
 	public void clear() {
 		for(int i = 0; i < getRows(); i++) {
@@ -146,5 +147,19 @@ public class MatchField {
 
 	public int getPieces() {
 		return this.pieces;
+	}
+	
+	public int getRow() {
+		for(int i = 0; i < getRows(); i++) {
+			for(int j = 0; j < getColumns(); j++) {
+				if(field[i][j].isEmpty()) {
+					return i;
+				} else {
+					continue;
+				}
+			}
+		}
+		
+		return -1;
 	}
 }

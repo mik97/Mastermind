@@ -9,11 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.PieceFactory;
+import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.player.Player;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
+import it.unicam.cs.pa.mastermind.player.Role;
+import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleSet;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
 import it.unicam.cs.pa.mastermind.piece.Color;
@@ -24,9 +28,6 @@ import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
  *
  */
 public final class Match {
-	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	private static PrintStream out = System.out;
-	
 	private static final Match INSTANCE = new Match();
 	private boolean initialized;
 	
@@ -41,25 +42,19 @@ public final class Match {
 	
 	private MatchStatus status = MatchStatus.INIT;
 	
-	private HashMap<PlayerAction, Function<Integer, Boolean>> actions;
+	private HashMap<PlayerAction, Function<Boolean, Boolean>> actions;
 	
 	private PieceFactory pieceFactory;
 	
 	private Match() {
 		actions = new HashMap<>();
-		List<AbstractPiece> pieces = new ArrayList<>();
 		
-		actions.put(PlayerAction.INSERTCOLOR, column -> {
-			for(int i = 0; i < field.getRows(); i++) {
-				AbstractPiece piece = pieceFactory.getPiece(Color.BIANCO);
-				pieces.add(piece);
-			}
-			return field.insert(pieces, column);
+		
+			actions.put(PlayerAction.INSERTCOLOR, value -> { return players[currentPlayer].insertCombination(); });
+			actions.put(PlayerAction.MAKECOMBINATION, value -> { return players[currentPlayer].makeCombination(); });
+			actions.put(PlayerAction.ISTHECORRECTCOMBINATION, value -> { return players[currentPlayer]
+					.isTheCorrectCombination(field.getCellList()); 
 			});
-	
-		//actions.put(PlayerAction.MAKECOMBINATION, value);
-		
-		//actions.put(PlayerAction.ISTHECORRECTCOMBINATION, value);
 		
 		this.initialized = false;
 	}
@@ -82,16 +77,22 @@ public final class Match {
 	public boolean initMatch(Player p1, Player p2, Map<String, Object> p) throws IllegalArgumentException{
 		if(!initialized) {
 			this.players = new Player[] { p1, p2 };
-			this.field = MatchField.getInstance();
+			this.field = new MatchField();
 			
+			this.referee = getObj(p.getOrDefault("referee", new DefaultRuleSet()),RuleSet.class);
+			Size size = getObj(p.getOrDefault("size", referee.getFieldSize()), Size.class);
+			this.field.init(size);
+
 			this.firstPlayer = getObj(p.getOrDefault("firstplayer", 0), Integer.class);
 			this.currentPlayer = this.firstPlayer;
+			
 			
 			if(currentPlayer < 0 || currentPlayer > 1)
 				throw new IllegalArgumentException("" + currentPlayer 
 						+ " is not allowed. The value of the current player must be 0 or 1! ");
 			
 			this.pieceFactory = PieceFactory.getInstance();
+			
 			this.initialized = true;
 			
 			return true;
@@ -138,19 +139,14 @@ public final class Match {
 	
 	private boolean doAction(PlayerAction action) {
 		
-		//int column = this.players[currentPlayer].selectTarget();
-		//boolean act = actions.get(action).apply(column);
+		if (this.referee.isValidAction(action)) {
+			actions.get(action).apply(true);
+			if (isEnd())
+				return false;
+		} else
+			return true;
 		
-		if(isEnd())
-			return false;
-		
-		if(this.referee.lineIsFull() == true ) 
-		{
-			String choice = Utils.doInput(in, out, "Confirm your choice ? : Yes or No ", 
-					(x)->x == "Yes" || x == "No", (x)->x.substring(0,1).toUpperCase()+x.substring(1));
-			this.referee.confirmInsert(choice);
-		}
-		
+		this.currentPlayer = otherPlayer(this.currentPlayer);
 		return false;
 	}
 	

@@ -3,6 +3,10 @@ package it.unicam.cs.pa.mastermind.player;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
+
+import java.util.List;
+
+import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 
 /**
@@ -12,19 +16,20 @@ import it.unicam.cs.pa.mastermind.core.MatchField;
 
 public abstract class Player
 {
-   protected String playerName;
-   protected PlayerAction action;
-   protected Role role;
-   protected int id;
-   protected RuleSet rule;
-   protected MatchField field;
-  
-   
-   
-   
+	protected String playerName;
+	protected PlayerAction action;
+	protected Role role;
+	protected int id;
+	protected RuleSet rule;
+	protected MatchField field;
+	protected List<Cell> combination;
+
 	public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
 	public abstract void init(int id, MatchField field, RuleSet rule);
 	public abstract int selectTarget();
+	public abstract boolean insertCombination();
+	public abstract boolean makeCombination();
+	public abstract boolean isTheCorrectCombination(List<Cell> comb);
 	
 	
 	public void startMatch() {
@@ -66,6 +71,14 @@ public abstract class Player
 	
 	public PlayerAction getAction() {
 		return action;
+	}
+	
+	public void setCombination(List<Cell> combination) {
+		this.combination = combination;
+	}
+	
+	public List<Cell> getCombination() {
+		return this.combination;
 	}
 	
 	public void youWin() {

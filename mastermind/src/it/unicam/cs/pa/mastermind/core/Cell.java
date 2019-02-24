@@ -8,7 +8,7 @@ import it.unicam.cs.pa.mastermind.piece.NullPiece;
  *
  */
 public class Cell {
-	
+
 	private AbstractPiece piece;
 	private CellStatus status;
 	

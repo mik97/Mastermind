@@ -5,12 +5,19 @@ package it.unicam.cs.pa.mastermind.player;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
+import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
+import it.unicam.cs.pa.mastermind.core.PieceFactory;
 import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
+import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
+import it.unicam.cs.pa.mastermind.piece.Color;
+import it.unicam.cs.pa.mastermind.piece.Piece;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 
 
@@ -61,10 +68,17 @@ public class InteractivePlayer extends Player {
 	public void init(int id, MatchField field, RuleSet rule) throws IllegalIdArgument
 	{
 		this.id = id;
-		this.field = field;
 		super.setRule(rule);
-		if(this.role == Role.CODEMAKER) this.action = PlayerAction.INSERTCOLOR;
-
+		
+		if(this.role == Role.CODEMAKER) {
+			this.action = PlayerAction.INSERTCOLOR;
+			this.field = null;
+			this.combination = new ArrayList<>();
+		}
+		else {
+			this.field = field;
+			this.combination = null;
+		}
 	}
 	
 
@@ -73,9 +87,49 @@ public class InteractivePlayer extends Player {
 	{   
 		int limit = this.field.getColumns()-1;
 		int target = Utils.doInput(in, out, "Chose Target: between 0 - "+limit,
-				(x)->x<= this.field.getColumns()-1, Integer::parseInt);
+				(x)-> x <= this.field.getColumns()-1, Integer::parseInt);
 		
 		return target;
 	}
-
+	
+	@Override
+	public boolean insertCombination() {
+		List<Color> colors = Utils.insertColor(in, out, this.field.getColumns());
+		List<AbstractPiece> pieces = new ArrayList<>();
+		
+		PieceFactory pieceFactory = PieceFactory.getInstance();
+		
+		colors.stream().forEach(x -> {
+			AbstractPiece piece = pieceFactory.getPiece(x);
+			pieces.add(piece);
+		});
+		
+		if(field.insert(pieces)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean makeCombination() {
+		
+		for(int i = 0; i < this.field.getColumns(); i++) {
+			int color = Utils.doInput(in, out, "Insert the combination: " + Utils.showColorValue(), 
+					(x) -> x > 0 | x <= Color.values().length, Integer::parseInt);
+			
+			Cell cell = new Cell();
+			cell.setPiece(new Piece(i, Color.getColor(color)));
+		
+			combination.add(cell);
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public boolean isTheCorrectCombination(List<Cell> combination) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
