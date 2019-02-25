@@ -13,7 +13,7 @@ import it.unicam.cs.pa.mastermind.player.PlayerAction;
 public interface RuleSet 
 {
 	public abstract int getCurrentLine();
-	public abstract Size getFiledSize();
+	public abstract Size getFieldSize();
 	public abstract HashMap<Integer, PlayerAction> getPlayerActionMap();
 	public  abstract boolean  LineIsFull();
 	public abstract void NextLine();

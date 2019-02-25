@@ -25,19 +25,22 @@ public class DefaultRuleSet implements RuleSet
 	public MatchField field;
 	private int currentLine = 6;
 	
-	public DefaultRuleSet(MatchField field) 
+	
+	
+	public DefaultRuleSet() 
 	{
 		playerActionMap.put(0, PlayerAction.INSERTCOLOR);
 		playerActionMap.put(1, PlayerAction.MAKECOMBINATION);
-		playerActionMap.put(2, PlayerAction.ISTHECORRECTCOMBINATION);
-		this.field=field;
-		
+		playerActionMap.put(2, PlayerAction.ISTHECORRECTCOMBINATION);		
 	}
 	
+	public void setField(MatchField field) {
+		this.field=field;
+	}
 
 	
 	@Override
-	public Size getFiledSize()
+	public Size getFieldSize()
 	{
 		return fieldSize;
 		

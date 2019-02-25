@@ -30,7 +30,7 @@ public class RuleFactory
 		
 		switch (choice) 
 		{
-		case "Default": return rule = new DefaultRuleset(field);
+		case "Default": return rule = new DefaultRuleSet();
 		case "Alternative": return rule = new AlternativeRuleset(chosenSize,field);	
 		}
 		return rule;

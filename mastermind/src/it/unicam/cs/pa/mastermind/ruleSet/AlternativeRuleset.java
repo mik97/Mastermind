@@ -1,7 +1,6 @@
 package it.unicam.cs.pa.mastermind.ruleSet;
 
 import java.util.HashMap;
-import java.util.List;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Size;
@@ -14,7 +13,7 @@ public class AlternativeRuleset implements RuleSet
 	
 	
 	@Override
-	public Size getFiledSize() {
+	public Size getFieldSize() {
 		
 		return fieldSize;
 	}
@@ -81,6 +80,4 @@ public class AlternativeRuleset implements RuleSet
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
 }
