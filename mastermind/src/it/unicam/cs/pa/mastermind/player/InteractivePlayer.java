@@ -17,7 +17,7 @@ import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
 import it.unicam.cs.pa.mastermind.piece.Color;
-import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 
 
 
@@ -76,7 +76,7 @@ public class InteractivePlayer extends Player {
 	 * @see it.unicam.cs.pa.mastermind.player.Player#init()
 	 */
 	@Override
-	public void init(int id,MatchField field, Ruleset rule)  throws IllegalIdArgument
+	public void init(int id,MatchField field, RuleSet rule)  throws IllegalIdArgument
 	{
 		this.id = id;
 		super.setRule(rule);

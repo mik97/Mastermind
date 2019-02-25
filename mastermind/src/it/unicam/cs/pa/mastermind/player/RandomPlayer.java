@@ -1,6 +1,6 @@
 package it.unicam.cs.pa.mastermind.player;
 
-import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -49,7 +49,7 @@ public class RandomPlayer extends Player
 	 * @see it.unicam.cs.pa.mastermind.player.Player#init()
 	 */
 	@Override
-	public void init(int id, MatchField filed,Ruleset rule) throws IllegalIdArgument	
+	public void init(int id, MatchField filed,RuleSet rule) throws IllegalIdArgument	
 	{
 		this.id = id;
 		super.setRule(rule);

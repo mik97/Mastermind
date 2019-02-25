@@ -6,7 +6,7 @@ import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.InternalException;
-import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 
 import java.awt.Desktop.Action;
 import java.io.BufferedReader;
@@ -25,7 +25,7 @@ public abstract class Player
    protected PlayerAction action;
    protected Role role;
    protected int id;
-   protected Ruleset rule;
+   protected RuleSet rule;
    protected MatchField filed;
    protected Cell CodeMakerCombination [];
 	protected BufferedReader in ;
@@ -61,7 +61,7 @@ public abstract PlayerAction selectAction() throws InternalException, IllegalRol
 	 * @param rule
 	 * @throws IllegalIdArgument
 	 */
-   public abstract void init(int id, MatchField filed,Ruleset rule) throws IllegalIdArgument;
+   public abstract void init(int id, MatchField filed,RuleSet rule) throws IllegalIdArgument;
    /**
     * Initialize match's parameters
     */
@@ -90,7 +90,7 @@ public void setRole(Role role)
 	this.role = role;
 }
 
-public void setRule(Ruleset rule) {
+public void setRule(RuleSet rule) {
 	this.rule = rule;
 }
 
@@ -102,7 +102,7 @@ public int getId() {
 	return id;
 }
 
-public Ruleset getRule() {
+public RuleSet getRule() {
 	return rule;
 }
 

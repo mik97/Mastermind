@@ -24,9 +24,9 @@ public class RuleFactory
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public Ruleset getRule()throws IllegalArgumentException
+	public RuleSet getRule()throws IllegalArgumentException
 	{	
-		Ruleset rule = null;  
+		RuleSet rule = null;  
 		
 		switch (choice) 
 		{

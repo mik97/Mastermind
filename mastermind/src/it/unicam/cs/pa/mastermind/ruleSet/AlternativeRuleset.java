@@ -7,7 +7,7 @@ import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
-public class AlternativeRuleset implements Ruleset
+public class AlternativeRuleset implements RuleSet
 {
 	public static Size fieldSize;
 	public MatchField field;

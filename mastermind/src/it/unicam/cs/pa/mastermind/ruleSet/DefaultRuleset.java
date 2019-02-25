@@ -18,7 +18,7 @@ import it.unicam.cs.pa.mastermind.player.PlayerAction;
  *
  */
 
-public class DefaultRuleset implements Ruleset
+public class DefaultRuleset implements RuleSet
 {
 	public static final Size fieldSize = new Size(7,4);
 	private HashMap<Integer, PlayerAction> playerActionMap = new HashMap();

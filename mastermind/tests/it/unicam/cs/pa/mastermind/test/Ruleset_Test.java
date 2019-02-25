@@ -16,7 +16,7 @@ import it.unicam.cs.pa.mastermind.piece.Piece;
 import it.unicam.cs.pa.mastermind.ruleSet.AlternativeRuleset;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleset;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleFactory;
-import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 
 /**
  * @author luca
@@ -81,7 +81,7 @@ class Ruleset_Test
 	@Test
 	void Test_RuleFactory_DefaultRuleset()
 	{
-		Ruleset RuR = factory.getRule();
+		RuleSet RuR = factory.getRule();
 		assertTrue(RuR.getClass().equals(new AlternativeRuleset(RuR.getFiledSize(), null).getClass()));
 		assertTrue(RuR.getFiledSize().getRow() >=7 && RuR.getFiledSize().getColumn() >=4);
 	}

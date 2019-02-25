@@ -11,7 +11,7 @@ import it.unicam.cs.pa.mastermind.core.PieceFactory;
 import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.player.Player;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
-import it.unicam.cs.pa.mastermind.ruleSet.Ruleset;
+import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
 import it.unicam.cs.pa.mastermind.piece.Color;
 import it.unicam.cs.pa.mastermind.piece.Piece;
@@ -34,7 +34,7 @@ public final class Match {
 	private int firstPlayer;
 	private int currentPlayer;
 	private int attempts;
-	private Ruleset referee;
+	private RuleSet referee;
 	
 	private MatchStatus status = MatchStatus.INIT;
 	
