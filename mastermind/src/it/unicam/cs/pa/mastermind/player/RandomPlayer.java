@@ -24,16 +24,20 @@ public class RandomPlayer extends Player
 {
 	
 	private PlayerAction secondaryAction;
-
 	
-	public PlayerAction selectAction()
-	{return action;}
-
+//	public  RandomPlayer(String name,Role role,InputStream in, PrintStream out) 
+//	{   super(name,role,in,out);
+//		
+//	}
 	
 	public  RandomPlayer(String name,Role role) 
 	{
 		this.playerName=name;
 		this.role=role;
+	}
+	
+	public PlayerAction selectAction() {
+		return action;
 	}
 	
 	@Override
@@ -42,6 +46,7 @@ public class RandomPlayer extends Player
 		this.id = id;
 		this.field = field;
 		super.setRule(rule);
+		
 		switch (role) {
 		case CODEBREAKER:
 			action=rule.getPlayerActionMap().get(0);
@@ -61,13 +66,6 @@ public class RandomPlayer extends Player
 	public PlayerAction getSecondaryAction() 
 	{
 		return secondaryAction;
-	}
-
-
-	@Override
-	public int selectTarget() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 	@Override
@@ -91,8 +89,18 @@ public class RandomPlayer extends Player
 
 	@Override
 	public boolean makeCombination() {
-		// TODO Auto-generated method stub
-		return false;
+		Cell [] combination = new Cell[filed.getColumns()];
+		List<Color>color= Arrays.asList(Color.values());
+		Random rand = new Random();
+		Color a = null;
+		
+		for(int i = 0; i<filed.getColumns();i++)
+		{
+			a = color.get(rand.nextInt(color.size()));
+			combination[i]= new Cell();
+			combination[i].setPiece(new Piece(i+1, a));
+		}
+		this.CodeMakerCombination = combination;
 	}
 
 

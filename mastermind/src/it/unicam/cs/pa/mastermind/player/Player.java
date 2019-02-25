@@ -26,7 +26,6 @@ public abstract class Player
 
 	public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
 	public abstract void init(int id, MatchField field, RuleSet rule);
-	public abstract int selectTarget();
 	public abstract boolean insertCombination();
 	public abstract boolean makeCombination();
 	public abstract boolean isTheCorrectCombination(List<Cell> comb);

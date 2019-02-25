@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
-import it.unicam.cs.pa.mastermind.player.Role;
 
 /**
  * @author luca
@@ -13,20 +12,13 @@ import it.unicam.cs.pa.mastermind.player.Role;
 
 public interface RuleSet 
 {
-
-	public Size getFieldSize();
-
-	public void switchColor();
-	
-	public void removeColor();
-	
-	public void confirmInsert();
-	
-	public boolean lineIsFull();
-	
-	public HashMap<Integer, PlayerAction> getPlayerActionMap();
-	
-	public Role theWinnerIs();
-	
-	public boolean confirmInsert(String choice);
+	public abstract int getCurrentLine();
+	public abstract Size getFiledSize();
+	public abstract HashMap<Integer, PlayerAction> getPlayerActionMap();
+	public  abstract boolean  LineIsFull();
+	public abstract void NextLine();
+	public abstract boolean ConfirmInsert(String choice);
+	public abstract void Switch(int posIn, int posFin);
+	public abstract void Remove(int Target);
+	public  abstract boolean isValidAction(int V);
 }

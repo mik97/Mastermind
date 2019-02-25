@@ -93,6 +93,7 @@ public class MatchField {
 		for(int i = 0; i < getColumns(); i++) {
 			cells.add(field[getRow()][i]);
 		}		
+	
 		
 		return cells;
 	}

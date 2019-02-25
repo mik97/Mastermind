@@ -20,7 +20,16 @@ import it.unicam.cs.pa.mastermind.piece.Color;
 
 public  class Utils
 {
-
+	/**
+	 * 
+	 * @param in
+	 * @param out
+	 * @param request
+	 * @param condition
+	 * @param readFun
+	 * @return
+	 * @throws InternalException
+	 */
 	public static <T> T doInput(BufferedReader in, PrintStream out, String request, Predicate<T> condition, Function<String, T> readFun)throws InternalException
 	{
 		while (true)
@@ -44,7 +53,7 @@ public  class Utils
 				      }
 			 return x;
 					  
-		} 
+		}
 	}
 	
 	public static String showColorValue() {

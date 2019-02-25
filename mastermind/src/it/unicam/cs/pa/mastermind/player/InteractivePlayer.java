@@ -63,6 +63,16 @@ public class InteractivePlayer extends Player {
 		this.playerName = name;
 		this.role = role;
 	}
+	
+//	public InteractivePlayer(String name,Role role,InputStream in, PrintStream out)
+//	{  
+//		super(name,role,in,out);
+//	}
+//	
+//	public InteractivePlayer(String name,Role role) 
+//	{
+//		this(name, role, System.in, System.out);
+//	}
 
 	@Override
 	public void init(int id, MatchField field, RuleSet rule) throws IllegalIdArgument
@@ -82,15 +92,15 @@ public class InteractivePlayer extends Player {
 	}
 	
 
-	@Override
-	public int selectTarget()
-	{   
-		int limit = this.field.getColumns()-1;
-		int target = Utils.doInput(in, out, "Chose Target: between 0 - "+limit,
-				(x)-> x <= this.field.getColumns()-1, Integer::parseInt);
-		
-		return target;
-	}
+//	@Override
+//	public int selectTarget()
+//	{   
+//		int limit = this.field.getColumns()-1;
+//		int target = Utils.doInput(in, out, "Chose Target: between 0 - "+limit,
+//				(x)-> x <= this.field.getColumns()-1, Integer::parseInt);
+//		
+//		return target;
+//	}
 	
 	@Override
 	public boolean insertCombination() {
@@ -129,7 +139,18 @@ public class InteractivePlayer extends Player {
 	
 	@Override
 	public boolean isTheCorrectCombination(List<Cell> combination) {
-		// TODO Auto-generated method stub
+//		switch (choice) 
+//		{
+//		
+//		case "Yes":
+//			return true;
+//	
+//				
+//				
+//		case "No":
+//				return false;
+//			
+//		}
 		return false;
 	}
 }

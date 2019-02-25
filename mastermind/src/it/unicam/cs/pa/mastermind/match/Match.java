@@ -79,7 +79,7 @@ public final class Match {
 			this.players = new Player[] { p1, p2 };
 			this.field = new MatchField();
 			
-			this.referee = getObj(p.getOrDefault("referee", new DefaultRuleSet()),RuleSet.class);
+			this.referee = getObj(p.getOrDefault("referee", new DefaultRuleSet(this.field)),RuleSet.class);
 			Size size = getObj(p.getOrDefault("size", referee.getFieldSize()), Size.class);
 			this.field.init(size);
 

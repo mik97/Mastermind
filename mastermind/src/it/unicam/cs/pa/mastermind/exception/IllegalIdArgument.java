@@ -9,7 +9,7 @@ package it.unicam.cs.pa.mastermind.exception;
  */
 public class IllegalIdArgument extends IllegalArgumentException {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionID = 1L;
 	
 	public final int id;
 	

@@ -18,6 +18,6 @@ public IllegalRoleActionException()
   @Override
 	public String toString() {
 		
-		return getMessage()+": your role does not allow this action";
+		return getMessage()+": your role does not allow this action\n";
 	}
 }

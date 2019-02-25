@@ -17,7 +17,7 @@ import it.unicam.cs.pa.mastermind.piece.Piece;
  * @author Michele Celozzi
  *
  */
-class MatchFieldTest {
+class MatchField_Test {
 	
 	MatchField mfield = new MatchField();
 	Size size = new Size(7,4);
@@ -66,4 +66,5 @@ class MatchFieldTest {
 		
 		assertTrue(mfield.insert(piece) != false);
 	}
+	
 }
