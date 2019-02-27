@@ -15,10 +15,9 @@ public interface RuleSet
 	public abstract int getCurrentLine();
 	public abstract Size getFieldSize();
 	public abstract HashMap<Integer, PlayerAction> getPlayerActionMap();
-	public  abstract boolean  LineIsFull();
-	public abstract void NextLine();
+	public  abstract boolean  checkField();
 	public abstract boolean ConfirmInsert(String choice);
 	public abstract void Switch(int posIn, int posFin);
 	public abstract void Remove(int Target);
-	public  abstract boolean isValidAction(int V);
+	public  abstract boolean isValidAction(PlayerAction action);
 }

@@ -24,17 +24,6 @@ public class AlternativeRuleset implements RuleSet
 		return null;
 	}
 
-	@Override
-	public boolean LineIsFull() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void NextLine() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean ConfirmInsert(String choice) {
@@ -76,7 +65,13 @@ public class AlternativeRuleset implements RuleSet
 	}
 
 	@Override
-	public boolean isValidAction(int V) {
+	public boolean isValidAction(PlayerAction action) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkField() {
 		// TODO Auto-generated method stub
 		return false;
 	}

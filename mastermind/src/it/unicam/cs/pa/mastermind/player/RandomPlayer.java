@@ -1,18 +1,20 @@
 package it.unicam.cs.pa.mastermind.player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.PieceFactory;
 import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 import it.unicam.cs.pa.mastermind.piece.Color;
+import it.unicam.cs.pa.mastermind.piece.Piece;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
+import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
 
 
 /**
@@ -36,9 +38,7 @@ public class RandomPlayer extends Player
 		this.role=role;
 	}
 	
-	public PlayerAction selectAction() {
-		return action;
-	}
+	
 	
 	@Override
 	public void init(int id, MatchField field, RuleSet rule)throws IllegalIdArgument
@@ -56,6 +56,7 @@ public class RandomPlayer extends Player
 		case CODEMAKER:
 			action=rule.getPlayerActionMap().get(1);
 			secondaryAction=rule.getPlayerActionMap().get(2);
+			combination = new ArrayList<Cell>();
 			break;
 		
 		}
@@ -66,6 +67,10 @@ public class RandomPlayer extends Player
 	public PlayerAction getSecondaryAction() 
 	{
 		return secondaryAction;
+	}
+	public PlayerAction selectAction() 
+	{
+		return action;
 	}
 	
 	@Override
@@ -89,18 +94,20 @@ public class RandomPlayer extends Player
 
 	@Override
 	public boolean makeCombination() {
-		Cell [] combination = new Cell[filed.getColumns()];
+		Cell [] combination = new Cell[field.getColumns()];
 		List<Color>color= Arrays.asList(Color.values());
 		Random rand = new Random();
 		Color a = null;
 		
-		for(int i = 0; i<filed.getColumns();i++)
+		for(int i = 0; i<field.getColumns();i++)
 		{
 			a = color.get(rand.nextInt(color.size()));
 			combination[i]= new Cell();
 			combination[i].setPiece(new Piece(i+1, a));
+			this.combination.add(combination[i]);
 		}
-		this.CodeMakerCombination = combination;
+		if (this.combination.isEmpty()) return false;
+		return true;
 	}
 
 

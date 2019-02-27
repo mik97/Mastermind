@@ -14,7 +14,7 @@ import it.unicam.cs.pa.mastermind.player.InteractivePlayer;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 import it.unicam.cs.pa.mastermind.player.RandomPlayer;
 import it.unicam.cs.pa.mastermind.player.Role;
-import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleset;
+import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleSet;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 
 /**
@@ -25,26 +25,28 @@ import it.unicam.cs.pa.mastermind.core.MatchField;
 class Player_Test 
 
 {	
-	MatchField mfield = MatchField.getInstance();
-	DefaultRuleset rule = new DefaultRuleset(mfield);
+	MatchField mfield = new MatchField();
+	DefaultRuleSet rule = new DefaultRuleSet();
 	
 	
 	InteractivePlayer P1 = new InteractivePlayer("SUS",Role.CODEBREAKER);
 	RandomPlayer P2 = new RandomPlayer("SIS", Role.CODEMAKER);
-	
+	InteractivePlayer P3 = new InteractivePlayer("SIX",Role.CODEMAKER);
 	
 	
 	@Test
 	void Test_Init_InteracivePlayer() 
 	{	
-		mfield.init(rule.getFiledSize());
+		mfield.init(rule.getFieldSize());
+		rule.setField(mfield);
 		P1.init(1, mfield,rule);
+		
 		assertTrue(P1.getRule() != null);
 		assertTrue(P1.getId()!=0);
 	}
 	
 	@Test
-	void Test_SelectAction_InteracivePlayer()
+	void Test_SelectAction_InteracivePlayer_CodeBreacker()
 	
 	{	Test_Init_InteracivePlayer();
 		P1.selectAction();
@@ -52,17 +54,45 @@ class Player_Test
 	}
 	
 	@Test
+	void Test_SelectAction_InteracivePlayer_CodeMacker()
+	
+	{	
+		mfield.init(rule.getFieldSize());
+		P3.init(5, mfield, rule);
+		P3.selectAction();
+		assertTrue(P3.getAction()!= null);
+	}
+	
+	@Test
 	void Test_isTheCorrectCombination_InteracivePlayer() 
 	{
 		Test_Init_InteracivePlayer();
-		assertTrue(P1.isTheCorrectCombination("Yes"));
+		// is the correct combination
+	}
+	
+	@Test
+	void Test_Interactive_MakeComb()
+	{
+		mfield.init(rule.getFieldSize());
+		P3.init(5, mfield, rule);
+		P3.makeCombination();
+		assertTrue(P3.getCombination() != null);
+	}
+	
+	@Test
+	void Test_Interactive_insertCombination()
+	{ Test_Init_InteracivePlayer();
+	  P1.insertCombination();
+	  assertFalse(mfield.getCellList(0).isEmpty());
 	}
 	
 	@Test
 	void Test_Init_RandomPlayer()
 	{	
-		mfield.init(rule.getFiledSize());
+		mfield.init(rule.getFieldSize());
+		rule.setField(mfield);
 		P2.init(2, mfield, rule);
+		
 		assertTrue(P2.getRule() != null);
 		assertTrue(P2.getId()!=0);
 		
@@ -98,10 +128,9 @@ class Player_Test
 	void Test_RandomPlayer_MakeComb()
 	{
 		Test_Init_RandomPlayer();
-		P2.makeComb();
-		assertTrue(P2.getCodeMakerCombination() != null);
+		P2.makeCombination();
+		assertTrue(P2.getCombination() != null);
 	}
-	
 	
 	
 }

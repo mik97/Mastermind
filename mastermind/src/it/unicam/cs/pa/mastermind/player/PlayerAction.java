@@ -9,23 +9,23 @@ package it.unicam.cs.pa.mastermind.player;
 
 public enum PlayerAction
 {
-	INSERTCOLOR,
-	MAKECOMBINATION,
-	ISTHECORRECTCOMBINATION;
+	InsertColor,
+	MakeCombination,
+	IsTheCorrectCombination;
 
 	@Override
 	public String toString() {
 
 		switch (this) {
-		case INSERTCOLOR:
+		case InsertColor:
 			return "InsertColor";
-		case MAKECOMBINATION:
+		case MakeCombination:
 			return "MakeCombination";
-		case ISTHECORRECTCOMBINATION:
+		case IsTheCorrectCombination:
 			return "IsTheCorrectCombination";
 		}
 		return super.name();
 	}
-	
+
 	
 }
