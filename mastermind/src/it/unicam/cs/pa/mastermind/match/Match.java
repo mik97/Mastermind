@@ -50,9 +50,9 @@ public final class Match {
 		actions = new HashMap<>();
 		
 		
-			actions.put(PlayerAction.INSERTCOLOR, value -> { return players[currentPlayer].insertCombination(); });
-			actions.put(PlayerAction.MAKECOMBINATION, value -> { return players[currentPlayer].makeCombination(); });
-			actions.put(PlayerAction.ISTHECORRECTCOMBINATION, value -> { return players[currentPlayer]
+			actions.put(PlayerAction.InsertColor, value -> { return players[currentPlayer].insertCombination(); });
+			actions.put(PlayerAction.MakeCombination, value -> { return players[currentPlayer].makeCombination(); });
+			actions.put(PlayerAction.IsTheCorrectCombination, value -> { return players[currentPlayer]
 					.isTheCorrectCombination(field.getCellList()); 
 			});
 		

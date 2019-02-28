@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.mastermind.ruleSet;
 
 import java.util.HashMap;
+import java.util.List;
 
 import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.CellStatus;
@@ -23,15 +24,15 @@ public class DefaultRuleSet implements RuleSet
 	public static final Size fieldSize = new Size(7,4);
 	private HashMap<Integer, PlayerAction> playerActionMap = new HashMap<>();
 	public MatchField field;
-	private int currentLine = 6;
+	private int currentLine;
 	
 	
 	
 	public DefaultRuleSet() 
 	{
-		playerActionMap.put(0, PlayerAction.INSERTCOLOR);
-		playerActionMap.put(1, PlayerAction.MAKECOMBINATION);
-		playerActionMap.put(2, PlayerAction.ISTHECORRECTCOMBINATION);		
+		playerActionMap.put(0, PlayerAction.InsertColor);
+		playerActionMap.put(1, PlayerAction.MakeCombination);
+		playerActionMap.put(2, PlayerAction.IsTheCorrectCombination);		
 	}
 	
 	public void setField(MatchField field) {
@@ -48,31 +49,43 @@ public class DefaultRuleSet implements RuleSet
 	@Override
 	public void Switch(int posIn, int posFin)// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
 	{
-		Cell[] cell = this.field.getRow().get(currentLine);
+		
+		this.checkField();
+		int line = currentLine ;
+		
+		List<Cell> cell = field.getCellList(--line);
 		
 		AbstractPiece a ;
 		AbstractPiece b;
 		
-		a=cell[posIn].pop();
-		b=cell[posFin].pop();
+		a = cell.get(posIn).pop();
+		b = cell.get(posFin).pop();
 		
-		cell[posIn].setPiece(b);
-		cell[posFin].setPiece(a);
+		cell.get(posIn).setPiece(b);
+		cell.get(posFin).setPiece(a);
 	}
 
 	@Override
 	public void Remove(int Target)	
 	{
-		Cell[] cell = this.field.getRow().get(currentLine);
-		cell[Target].pop();
+		this.checkField();
+		int a = currentLine ;
+		
+		List<Cell> cell = field.getCellList(--a);
+		cell.get(Target).pop();
+		
 		
 	}
 	
 	public void Remove(int Target,Piece newPiece)//utile se in caso di errore di inserimento.
 	{
-		Cell[] cell = this.field.getRow().get(currentLine);
-		cell[Target].pop();
-		cell[Target].setPiece(newPiece);
+		this.checkField();
+		int a = currentLine ;
+		
+		List<Cell> cell = field.getCellList(--a);
+		cell.get(Target).pop();
+		cell.get(Target).setPiece(newPiece);
+		cell.get(Target).setStatus(CellStatus.FULL);
 	}
 
 
@@ -96,39 +109,28 @@ public class DefaultRuleSet implements RuleSet
 		
 	}
 
-	
-
-
-	public boolean LineIsFull() //controlla se la riga è piena, quando è piena seleziona la riga sucessiva.
-	{	int counter = 0;
 		
-		Cell[] cell=field.getRow().get(currentLine);
-		for(int i = 0;i<field.getColumns();i++)
-		{   
-			if(cell[i].getStatus() == CellStatus.FULL)	counter++;
-			
-		}
-		if(counter == field.getColumns())
-		{
+	@Override
+	public boolean checkField() //controlla se il Field Ã¨ pieno, in caso sia pieno ritorna true , se e false ritorna la  riga corrente
+	{
+		
+
+		int cell=field.getRow();
+		if(cell == -1)
+		{	System.out.println("Field is full");
 			return true;
-		}else return false;
-		
+		}else {
+				currentLine = cell;
+				return false;
+				}
 	}
 
 
 
 	@Override
-	public void NextLine()
+	public boolean isValidAction(PlayerAction V) 
 	{
-		if(this.currentLine <0) System.out.println("The game is end"); 
-		else this.currentLine--;
-		
-	}
-
-	
-	public boolean isValidAction(int V) 
-	{
-		if (this.playerActionMap.get(V) != null)
+		if (this.playerActionMap.containsValue(V)==  true)
 			return true;
 		else
 			return false;
@@ -146,6 +148,8 @@ public class DefaultRuleSet implements RuleSet
 	{
 		return playerActionMap;
 	}
+
+	
 
 
 }

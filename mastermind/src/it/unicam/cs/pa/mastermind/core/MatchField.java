@@ -98,6 +98,17 @@ public class MatchField {
 		return cells;
 	}
 	
+	public List<Cell> getCellList(int target) { // usato dal regolamento per fare il remove di un pezzo
+		List<Cell> cells = new ArrayList<>();
+		
+		for(int i = 0; i < getColumns(); i++) {
+			cells.add(field[target][i]);
+		}		
+	
+		
+		return cells;
+	}
+	
 	private void insertPiece(List<Cell> cell, List<AbstractPiece> piece) {
 		if(cell.stream().anyMatch(cel -> cel.getStatus().equals(CellStatus.EMPTY))) {
 			for(int i = 0; i < cell.size(); i++) {
@@ -107,7 +118,7 @@ public class MatchField {
 			cell.stream().forEach(cel -> cel.setStatus(CellStatus.FULL));
 		}
 		
-		this.setCellInField(cell);
+		//this.setCellInField(cell);
 	}
 	
 	private void setCellInField(List<Cell> cells) {

@@ -32,22 +32,27 @@ public class InteractivePlayer extends Player {
 	private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private PrintStream out = System.out;
 
-	private boolean isValidAction(int V) {
-		if (this.getRule().getPlayerActionMap().get(V) != null)
-			return true;
-		else
-			return false;
-
-	}
+	
 
 	public PlayerAction selectAction() throws InternalException,IllegalRoleActionException{
+		
 		System.out.println("Available Actions:\n");
 		super.getRule().getPlayerActionMap().entrySet().forEach(i -> out.println(i.getKey() + " - " + i.getValue()));
-		int y = Utils.doInput(in, out, "choose an action", this::isValidAction, Integer::parseInt);
+		PlayerAction y = Utils.doInput(in, out, "choose an action", this.rule::isValidAction, PlayerAction::valueOf);
 		try {
-			if(this.role == Role.CODEBREAKER && y>0) throw new IllegalRoleActionException();
-			if(this.role == Role.CODEMAKER && y<1) throw new IllegalRoleActionException();
-			this.action = PlayerAction.values()[y];
+			switch (role)
+			{
+			
+			case CODEBREAKER:
+				if (y == PlayerAction.MakeCombination || y  == PlayerAction.IsTheCorrectCombination) throw new IllegalRoleActionException();
+				this.action = y;
+				break;
+
+			case CODEMAKER:
+				if(this.role == Role.CODEMAKER && y == PlayerAction.InsertColor) throw new IllegalRoleActionException();
+				this.action = y;
+				break;
+				}
 		    }
 		    catch (IllegalRoleActionException e)
 			{
@@ -81,7 +86,7 @@ public class InteractivePlayer extends Player {
 		super.setRule(rule);
 		
 		if(this.role == Role.CODEMAKER) {
-			this.action = PlayerAction.INSERTCOLOR;
+			this.action = PlayerAction.InsertColor;
 			this.field = null;
 			this.combination = new ArrayList<>();
 		}
@@ -124,9 +129,9 @@ public class InteractivePlayer extends Player {
 	@Override
 	public boolean makeCombination() {
 		
-		for(int i = 0; i < this.field.getColumns(); i++) {
-			int color = Utils.doInput(in, out, "Insert the combination: " + Utils.showColorValue(), 
-					(x) -> x > 0 | x <= Color.values().length, Integer::parseInt);
+		for(int i = 0; i < this.rule.getFieldSize().getColumn(); i++) {
+			int color = Utils.doInput(in, out, "Insert the secret combination: " + Utils.showColorValue(), 
+			(x) -> x > 0 | x <= Color.values().length, Integer::parseInt);
 			
 			Cell cell = new Cell();
 			cell.setPiece(new Piece(i, Color.getColor(color)));

@@ -60,7 +60,7 @@ public  class Utils
 		String str = "";
 		
 		for(Color x : Color.values()) {
-			str += "\n" + x.ordinal() + "for" + x.toString();
+			str += "\n" + x.ordinal() + " for " + x.toString();
 		}
 		
 		return str;

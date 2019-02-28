@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
@@ -53,6 +54,8 @@ class MatchField_Test {
 	
 	@Test
 	void testInsert() {
+		
+		testInitMatchField();
 		List<AbstractPiece> piece = new ArrayList<>();
 		Piece p1 = new Piece(0, Color.ARANCIONE);
 		Piece p2 = new Piece(1, Color.BLU);
@@ -64,7 +67,30 @@ class MatchField_Test {
 		piece.add(p3);
 		piece.add(p4);
 		
-		assertTrue(mfield.insert(piece) != false);
+		assertTrue(mfield.insert(piece) == true);
 	}
 	
+	@Test
+	void testGetRow() 
+	{
+		testInitMatchField();
+		mfield.getRow();
+		assertTrue(mfield.getRow() == 0);
+	}
+	
+	@Test
+	void testgetCellList() 
+	{
+		testInitMatchField();
+		testInsert();
+		List<Cell> a = mfield.getCellList();
+		List<Cell> b = mfield.getCellList(0);
+		
+		for (int i = 0; i < mfield.getColumns(); i++) 
+		{
+			System.out.println(a.get(i));
+			System.out.println("---div--- \n");
+			System.out.println(b.get(i));
+		}
+	}
 }
