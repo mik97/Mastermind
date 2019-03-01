@@ -86,7 +86,11 @@ public final class Match {
 			this.field.init(size);
 
 			this.firstPlayer = getObj(p.getOrDefault("firstplayer", 0), Integer.class);
-			this.currentPlayer = this.firstPlayer;
+			
+			if(this.players[firstPlayer].getRole().equals(Role.CODEMAKER))
+				this.currentPlayer = this.firstPlayer;
+			else
+				this.currentPlayer = otherPlayer(firstPlayer);
 			
 			
 			if(currentPlayer < 0 || currentPlayer > 1)
