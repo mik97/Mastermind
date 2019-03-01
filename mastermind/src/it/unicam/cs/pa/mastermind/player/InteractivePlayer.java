@@ -1,7 +1,5 @@
 package it.unicam.cs.pa.mastermind.player;
 
-
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -66,16 +64,6 @@ public class InteractivePlayer extends Player {
 		this.playerName = name;
 		this.role = role;
 	}
-	
-//	public InteractivePlayer(String name,Role role,InputStream in, PrintStream out)
-//	{  
-//		super(name,role,in,out);
-//	}
-//	
-//	public InteractivePlayer(String name,Role role) 
-//	{
-//		this(name, role, System.in, System.out);
-//	}
 
 	@Override
 	public void init(int id, MatchField field, RuleSet rule) throws IllegalIdArgument
@@ -93,17 +81,6 @@ public class InteractivePlayer extends Player {
 			this.combination = null;
 		}
 	}
-	
-
-//	@Override
-//	public int selectTarget()
-//	{   
-//		int limit = this.field.getColumns()-1;
-//		int target = Utils.doInput(in, out, "Chose Target: between 0 - "+limit,
-//				(x)-> x <= this.field.getColumns()-1, Integer::parseInt);
-//		
-//		return target;
-//	}
 	
 	@Override
 	public boolean insertCombination() {

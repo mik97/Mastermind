@@ -1,6 +1,5 @@
 package it.unicam.cs.pa.mastermind.exception;
 
-
 /**
  * @author luca
  *

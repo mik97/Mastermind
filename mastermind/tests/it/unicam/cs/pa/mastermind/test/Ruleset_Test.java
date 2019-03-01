@@ -7,16 +7,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
-import it.unicam.cs.pa.mastermind.core.Size;
 import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 import it.unicam.cs.pa.mastermind.piece.Color;
 import it.unicam.cs.pa.mastermind.piece.Piece;
-import it.unicam.cs.pa.mastermind.ruleSet.AlternativeRuleset;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleSet;
-import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
-
 /**
  * @author luca
  *
@@ -47,35 +42,5 @@ class Ruleset_Test
 		assertTrue(rule.checkField() == false);
 		
 	}
-	
-	
-//	@Test
-//	void Test_RemovreColor_DefaultRuleset()
-//	{ 
-//		Test_checkField_DefaultRuleset();
-//		rule.Remove(3);
-//		
-//		List<Cell> cell = filed.getCellList(0);
-//		assertTrue(cell.get(3).isEmpty());
-//	}
-	
-//	@Test
-//	void Test_RemovreColor_Alternative_DefaultRuleset()
-//	{ 
-//		Test_checkField_DefaultRuleset();
-//		rule.Remove(3, new Piece(11, Color.GIALLO));
-//		List<Cell> cell = filed.getCellList(0);
-//		assertTrue(cell.get(3).getPiece().getColor() == Color.GIALLO);
-//	}
-	
-//	@Test
-//	void Test_Switch_DefaultRuleset()
-//	{ 
-//		Test_checkField_DefaultRuleset();
-//		rule.Switch(0, 2);
-//		List<Cell> cell = filed.getCellList(0);
-//		assertTrue(cell.get(0).getPiece().getColor() == Color.ROSSO && cell.get(2).getPiece().getColor() == Color.ARANCIONE);
-//	}
-	
 	
 }

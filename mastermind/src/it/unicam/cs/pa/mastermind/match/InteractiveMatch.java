@@ -1,6 +1,3 @@
-/**
- * 
- */
 package it.unicam.cs.pa.mastermind.match;
 
 import java.util.HashMap;

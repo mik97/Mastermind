@@ -1,28 +1,18 @@
 package it.unicam.cs.pa.mastermind.match;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.PieceFactory;
 import it.unicam.cs.pa.mastermind.core.Size;
-import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.player.Player;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 import it.unicam.cs.pa.mastermind.player.Role;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleSet;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
-import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
-import it.unicam.cs.pa.mastermind.piece.Color;
-import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 
 /**
  * @author Michele Celozzi

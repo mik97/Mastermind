@@ -3,7 +3,6 @@ package it.unicam.cs.pa.mastermind.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
 import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
 
 /**

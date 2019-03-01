@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Size;
-import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
-import it.unicam.cs.pa.mastermind.piece.Piece;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 /**

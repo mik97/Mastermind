@@ -1,6 +1,3 @@
-/**
- * 
- */
 package it.unicam.cs.pa.mastermind.piece;
 
 import java.util.Optional;

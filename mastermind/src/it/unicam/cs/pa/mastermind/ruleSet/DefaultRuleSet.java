@@ -1,16 +1,9 @@
 package it.unicam.cs.pa.mastermind.ruleSet;
 
 import java.util.HashMap;
-import java.util.List;
 
-import it.unicam.cs.pa.mastermind.core.Cell;
-import it.unicam.cs.pa.mastermind.core.CellStatus;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.Size;
-import it.unicam.cs.pa.mastermind.core.Utils;
-import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
-import it.unicam.cs.pa.mastermind.piece.NullPiece;
-import it.unicam.cs.pa.mastermind.piece.Piece;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 
@@ -46,36 +39,9 @@ public class DefaultRuleSet implements RuleSet
 	{
 		return fieldSize;
 		
+	
 	}
-//	@Override
-//	public void Switch(int posIn, int posFin)// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
-//	{
-//		
-//		this.checkField();
-//		
-//		List<Cell> cell = field.getCellList(currentLine);
-//		AbstractPiece a ;
-//		AbstractPiece b;
-//		
-//		a = cell.get(posIn).pop();
-//		b = cell.get(posFin).pop();
-//		
-//		cell.get(posIn).setPiece(b);
-//		cell.get(posFin).setPiece(a);
-//	}
-
 	
-//	public void remove(int Target)	
-//	{
-//		this.checkField();
-//		
-//		List<Cell> cell = field.getCellList(currentLine);
-//		cell.get(Target).pop();
-//		
-//		
-//	}
-	
-
 	@Override
 	public boolean checkField() //controlla se il Field è pieno, in caso sia pieno ritorna true , se e false ritorna la  riga corrente
 	{
@@ -115,8 +81,4 @@ public class DefaultRuleSet implements RuleSet
 	{
 		return playerActionMap;
 	}
-
-	
-
-
 }
