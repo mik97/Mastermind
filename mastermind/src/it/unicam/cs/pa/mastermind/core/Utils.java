@@ -66,13 +66,14 @@ public  class Utils
 		return str;
 	}
 	
-	public static List<Color> insertColor(BufferedReader in, PrintStream out, int length) {
+	public static List<Color> insertColor(BufferedReader in, PrintStream out, int length)
+	{
 		List<Color> colors = new ArrayList<>();
 		int color;
+		System.out.println("Insert the color: \n"+Utils.showColorValue());
 		
 		for(int i = 0; i < length; i++) {
-			color = doInput(in, out, "Insert the color: " + Utils.showColorValue(), 
-					(x) -> x > 0 | x <= Color.values().length, Integer::parseInt);
+			color = doInput(in, out, "" ,(x) -> x >= 0 && x <= Color.values().length-1, Integer::parseInt);
 			
 			colors.add(Color.getColor(color));
 		}

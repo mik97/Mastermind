@@ -30,13 +30,6 @@ class Ruleset_Test
 	RuleFactory factory = new RuleFactory(new Size(7,6),"Alternative",filed);
 	
 	@Test
-	void Test_ConfirmInsert_DefaultRuleset()
-	{
-		filed.init(rule.getFieldSize());
-		assertFalse(rule.ConfirmInsert("Yes"));
-	}
-
-	@Test
 	void Test_checkField_DefaultRuleset()
 	{	
 		filed.init(rule.getFieldSize());

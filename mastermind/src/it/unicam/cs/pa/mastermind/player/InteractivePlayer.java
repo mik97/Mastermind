@@ -127,35 +127,40 @@ public class InteractivePlayer extends Player {
 	}
 	
 	@Override
-	public boolean makeCombination() {
-		
-		for(int i = 0; i < this.rule.getFieldSize().getColumn(); i++) {
-			int color = Utils.doInput(in, out, "Insert the secret combination: " + Utils.showColorValue(), 
-			(x) -> x > 0 | x <= Color.values().length, Integer::parseInt);
+	public boolean makeCombination() 
+	{
+		if(this.combination.isEmpty()) {
+		System.out.println("Insert the secret combination: \n"+Utils.showColorValue());
+		for(int i = 0; i < this.rule.getFieldSize().getColumn(); i++) 
+		{
+			int color = Utils.doInput(in, out, "",(x) -> x >= 0 && x <= Color.values().length -1, Integer::parseInt);
 			
 			Cell cell = new Cell();
 			cell.setPiece(new Piece(i, Color.getColor(color)));
 		
 			combination.add(cell);
 		}
-		
-		return true;
+	
 	}
+		return true;
+}
 	
 	@Override
-	public boolean isTheCorrectCombination(List<Cell> combination) {
-//		switch (choice) 
-//		{
-//		
-//		case "Yes":
-//			return true;
-//	
-//				
-//				
-//		case "No":
-//				return false;
-//			
-//		}
+	public boolean isTheCorrectCombination(List<Cell> combination) 
+	{
+		combination.stream().forEach(x-> System.out.print(x.getPiece().getColor()));
+		String choice = Utils.doInput(in, out, "\n Is the correct combination ? : y/n", (x)-> x.equals("y") || x.equals("n"),String::valueOf);
+		
+		if(choice == "y")return true;
+		else if(choice == "n")
+		{
+			int correct = Utils.doInput(in, out, "how many colors are correct ?",(x) -> x >= 0 && x <= field.getColumns(), Integer::parseInt);
+			int Wrong = Utils.doInput(in, out, "how many colors are wrong ?",(x) -> x >= 0 && x <= field.getColumns(), Integer::parseInt);
+			System.out.println("there are: "+correct+" corrct colors \n"+" and "+Wrong+" wrong colors");
+			return false;
+		}
 		return false;
 	}
+	
+
 }

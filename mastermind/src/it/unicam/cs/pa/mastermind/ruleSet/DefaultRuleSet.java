@@ -34,8 +34,9 @@ public class DefaultRuleSet implements RuleSet
 		playerActionMap.put(1, PlayerAction.MakeCombination);
 		playerActionMap.put(2, PlayerAction.IsTheCorrectCombination);		
 	}
-	
-	public void setField(MatchField field) {
+	@Override
+	public void setField(MatchField field) 
+	{
 		this.field=field;
 	}
 
@@ -51,10 +52,8 @@ public class DefaultRuleSet implements RuleSet
 	{
 		
 		this.checkField();
-		int line = currentLine ;
 		
-		List<Cell> cell = field.getCellList(--line);
-		
+		List<Cell> cell = field.getCellList(currentLine);
 		AbstractPiece a ;
 		AbstractPiece b;
 		
@@ -69,9 +68,8 @@ public class DefaultRuleSet implements RuleSet
 	public void Remove(int Target)	
 	{
 		this.checkField();
-		int a = currentLine ;
 		
-		List<Cell> cell = field.getCellList(--a);
+		List<Cell> cell = field.getCellList(currentLine);
 		cell.get(Target).pop();
 		
 		
@@ -80,34 +78,13 @@ public class DefaultRuleSet implements RuleSet
 	public void Remove(int Target,Piece newPiece)//utile se in caso di errore di inserimento.
 	{
 		this.checkField();
-		int a = currentLine ;
 		
-		List<Cell> cell = field.getCellList(--a);
+		List<Cell> cell = field.getCellList(currentLine);
 		cell.get(Target).pop();
 		cell.get(Target).setPiece(newPiece);
 		cell.get(Target).setStatus(CellStatus.FULL);
 	}
 
-
-	@Override
-	public boolean ConfirmInsert(String choice)//una volta inserita la combinazione chiede conferma in caso di risposta negativa mostra le cose possibili da fare.
-	{
-		switch (choice)
-		{
-		case "Yes":
-			System.out.println("Your turn is end");
-			return false;
-			
-
-		case "No":
-		System.out.println();
-		return true;
-			 
-		}
-		return false;
-
-		
-	}
 
 		
 	@Override
@@ -120,7 +97,7 @@ public class DefaultRuleSet implements RuleSet
 		{	System.out.println("Field is full");
 			return true;
 		}else {
-				currentLine = cell;
+				currentLine = cell -1;
 				return false;
 				}
 	}
@@ -130,11 +107,14 @@ public class DefaultRuleSet implements RuleSet
 	@Override
 	public boolean isValidAction(PlayerAction V) 
 	{
+		if(V.equals(PlayerAction.MakeCombination) && this.field.getRow() !=0) return false;
+		
 		if (this.playerActionMap.containsValue(V)==  true)
 			return true;
 		else
 			return false;
 
+		
 	}
 	
 	public int getCurrentLine()

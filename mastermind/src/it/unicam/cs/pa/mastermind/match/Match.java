@@ -19,6 +19,7 @@ import it.unicam.cs.pa.mastermind.player.PlayerAction;
 import it.unicam.cs.pa.mastermind.player.Role;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleSet;
 import it.unicam.cs.pa.mastermind.ruleSet.RuleSet;
+import it.unicam.cs.pa.mastermind.exception.IllegalRoleActionException;
 import it.unicam.cs.pa.mastermind.exception.UnitializedSingleton;
 import it.unicam.cs.pa.mastermind.piece.Color;
 import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
@@ -53,7 +54,7 @@ public final class Match {
 			actions.put(PlayerAction.InsertColor, value -> { return players[currentPlayer].insertCombination(); });
 			actions.put(PlayerAction.MakeCombination, value -> { return players[currentPlayer].makeCombination(); });
 			actions.put(PlayerAction.IsTheCorrectCombination, value -> { return players[currentPlayer]
-					.isTheCorrectCombination(field.getCellList()); 
+					.isTheCorrectCombination(field.getCellList(field.getRow() - 1 )); 
 			});
 		
 		this.initialized = false;
@@ -80,6 +81,7 @@ public final class Match {
 			this.field = new MatchField();
 			
 			this.referee = getObj(p.getOrDefault("referee", new DefaultRuleSet()),RuleSet.class);
+			this.referee.setField(field);
 			Size size = getObj(p.getOrDefault("size", referee.getFieldSize()), Size.class);
 			this.field.init(size);
 
@@ -137,17 +139,28 @@ public final class Match {
 			;
 	}
 	
-	private boolean doAction(PlayerAction action) {
+	private boolean doAction(PlayerAction action) 
+	{
 		
 		if (this.referee.isValidAction(action)) {
-			actions.get(action).apply(true);
-			if (isEnd())
-				return false;
+			
+			if(!(action.equals(null)))
+				{
+				boolean a = actions.get(action).apply(true);
+				if (isEnd(a,action))
+					return false;
+				}
+			else 
+			{
+				System.out.println("the action is not allowed. pleas insert another");
+				doAction(this.players[currentPlayer].selectAction());
+			}
+			
 		} else
 			return true;
 		
 		this.currentPlayer = otherPlayer(this.currentPlayer);
-		return false;
+		return true;
 	}
 	
 	public boolean init(int player) {
@@ -175,18 +188,30 @@ public final class Match {
 		this.status = status;
 	}
 	
-	private boolean isEnd() {
-		if(field.getPieces() == (field.getRows() * field.getColumns())) {
+	private boolean isEnd(boolean end, PlayerAction action) {
+		if(!(action.equals(PlayerAction.IsTheCorrectCombination))) {
 			return false;
 		}
-		
-		win(currentPlayer);
+		else 
+		{
+			if(!end) return false;
+		}
+		win(end);
 		return true;
 	}
 	
-	public void win(int winner){
-		this.players[winner].youWin();
-		this.players[otherPlayer(winner)].youLose();
+	public void win(boolean win){
+		if(win) {
+		this.players[currentPlayer].youLose();
+		this.players[otherPlayer(currentPlayer)].youWin();
+		}else 
+		{
+			if((this.field.getRow() == this.referee.getFieldSize().getRow() -1) && !win)
+			{
+				this.players[currentPlayer].youWin();
+				this.players[otherPlayer(currentPlayer)].youLose();
+			}
+		}
 	}
 	
 	private <T> T getObj(Object obj, Class<? extends T> target) throws IllegalArgumentException{

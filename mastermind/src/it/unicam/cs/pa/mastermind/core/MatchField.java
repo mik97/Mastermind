@@ -51,8 +51,8 @@ public class MatchField {
 	public boolean insert(List<AbstractPiece> piece) {
 		initCheckup();
 		if(pieces <= getRows()*getColumns()) {
-			if(checkInsert(getCellList(), getRow())) {
-				insertPiece(getCellList(), piece);
+			if(checkInsert(getCellList(getRow()), getRow())) {
+				insertPiece(getCellList(getRow()), piece);
 				return true;
 			}
 			return false;
@@ -87,27 +87,17 @@ public class MatchField {
 		return cell;
 	}
 	
-	public List<Cell> getCellList() {
+	public List<Cell> getCellList(int row) {
 		List<Cell> cells = new ArrayList<>();
 		
 		for(int i = 0; i < getColumns(); i++) {
-			cells.add(field[getRow()][i]);
+			cells.add(field[row][i]);
 		}		
 	
 		
 		return cells;
 	}
 	
-	public List<Cell> getCellList(int target) { // usato dal regolamento per fare il remove di un pezzo
-		List<Cell> cells = new ArrayList<>();
-		
-		for(int i = 0; i < getColumns(); i++) {
-			cells.add(field[target][i]);
-		}		
-	
-		
-		return cells;
-	}
 	
 	private void insertPiece(List<Cell> cell, List<AbstractPiece> piece) {
 		if(cell.stream().anyMatch(cel -> cel.getStatus().equals(CellStatus.EMPTY))) {

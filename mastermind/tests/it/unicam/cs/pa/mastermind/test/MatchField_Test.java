@@ -83,14 +83,12 @@ class MatchField_Test {
 	{
 		testInitMatchField();
 		testInsert();
-		List<Cell> a = mfield.getCellList();
-		List<Cell> b = mfield.getCellList(0);
+		List<Cell> a = mfield.getCellList(0);
 		
 		for (int i = 0; i < mfield.getColumns(); i++) 
 		{
 			System.out.println(a.get(i));
 			System.out.println("---div--- \n");
-			System.out.println(b.get(i));
 		}
 	}
 }

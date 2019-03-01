@@ -7,14 +7,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+
 
 import it.unicam.cs.pa.mastermind.player.InteractivePlayer;
 import it.unicam.cs.pa.mastermind.player.PlayerAction;
 import it.unicam.cs.pa.mastermind.player.RandomPlayer;
 import it.unicam.cs.pa.mastermind.player.Role;
 import it.unicam.cs.pa.mastermind.ruleSet.DefaultRuleSet;
+import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.core.MatchField;
 
 /**
@@ -132,5 +136,15 @@ class Player_Test
 		assertTrue(P2.getCombination() != null);
 	}
 	
+	@Test
+	void Test_RandomPlayer_IsTheCorrectCombination()
+	{
+		Test_Init_RandomPlayer();
+		Test_Init_InteracivePlayer();
+		P2.makeCombination();
+		P1.insertCombination();
+		P2.isTheCorrectCombination(mfield.getCellList(0));
+		
+	}
 	
 }

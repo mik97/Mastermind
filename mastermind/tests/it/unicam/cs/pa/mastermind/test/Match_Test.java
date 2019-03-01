@@ -19,8 +19,8 @@ class Match_Test {
 
 	Match pipo = Match.getInstance();
 	
-	Player p1 = new InteractivePlayer("SUS", Role.CODEBREAKER);
-	Player p2 = new InteractivePlayer("SAS", Role.CODEMAKER);
+	Player p1 = new InteractivePlayer("SUS", Role.CODEMAKER);
+	Player p2 = new InteractivePlayer("SAS", Role.CODEBREAKER);
 	
 	MatchField filed = new MatchField();
 	
