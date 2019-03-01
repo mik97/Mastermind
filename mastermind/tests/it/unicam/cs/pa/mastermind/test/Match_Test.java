@@ -34,14 +34,16 @@ class Match_Test {
 	void TestMatch()
 	{   
 		
+		prop.put("size", DefaultRuleSet.fieldSize);
+		prop.put("referee", new DefaultRuleSet());
 		prop.put("firstPlayer", 0);
 		pipo.initMatch(p1, p2, prop);
 		
-		p1.init(0, filed, refree);
-		p2.init(1, filed, refree);
-		filed.init(size);
-		filed.topUp();
-		pipo.play();
+//		p1.init(0, filed, refree);
+//		p2.init(1, filed, refree);
+//		filed.init(size);
+//		filed.topUp();
+		pipo.start();
 	}
 
 }

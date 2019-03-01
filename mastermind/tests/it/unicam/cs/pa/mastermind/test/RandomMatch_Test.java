@@ -22,10 +22,6 @@ class RandomMatch_Test {
 	@Test
 	void Match_Tests_Random() 
 	{
-		
-		
-		
-		
 		prop.put("size", DefaultRuleSet.fieldSize);
 		prop.put("referee", new DefaultRuleSet());
 		prop.put("firstPlayer", 0);

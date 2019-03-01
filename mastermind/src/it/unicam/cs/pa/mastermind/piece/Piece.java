@@ -14,7 +14,7 @@ import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 public class Piece extends AbstractPiece {
 	
 	private int id;
-	private Color color;
+	private Color color = null;
 	
 	public Piece(int id, Color c)throws IllegalIdArgument {
 		if(id >= 0) {

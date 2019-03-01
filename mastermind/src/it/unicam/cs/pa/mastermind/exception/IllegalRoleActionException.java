@@ -8,9 +8,9 @@ package it.unicam.cs.pa.mastermind.exception;
 
 public class IllegalRoleActionException extends IllegalArgumentException 
 {
- private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-public IllegalRoleActionException()
+ 	public IllegalRoleActionException()
  	{
 	  super("Role Issue");
  	}

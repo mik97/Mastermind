@@ -54,7 +54,7 @@ public final class Match {
 			actions.put(PlayerAction.InsertColor, value -> { return players[currentPlayer].insertCombination(); });
 			actions.put(PlayerAction.MakeCombination, value -> { return players[currentPlayer].makeCombination(); });
 			actions.put(PlayerAction.IsTheCorrectCombination, value -> { return players[currentPlayer]
-					.isTheCorrectCombination(field.getCellList(field.getRow() - 1 )); 
+					.isTheCorrectCombination(field.getCellList(field.getRow() - 1)); 
 			});
 		
 		this.initialized = false;
@@ -143,21 +143,25 @@ public final class Match {
 	{
 		
 		if (this.referee.isValidAction(action)) {
+
+			boolean a = actions.get(action).apply(true);
+			if (isEnd(a,action))
+				return false;
 			
-			if(!(action.equals(null)))
-				{
-				boolean a = actions.get(action).apply(true);
-				if (isEnd(a,action))
-					return false;
-				}
-			else 
-			{
-				System.out.println("the action is not allowed. pleas insert another");
-				doAction(this.players[currentPlayer].selectAction());
+		} else {
+			System.out.println("the action is not allowed. pleas insert another");
+			doAction(this.players[currentPlayer].selectAction());
+		}
+		
+		for(int i = 0; i < this.field.getRows(); i++) {
+			for(int j = 0; j < this.field.getColumns(); j++) {
+				if(this.field.getField()[i][j].getPiece().getColor() == null)
+					System.out.print("|| null || ");
+				else
+					System.out.print("|| " + this.field.getField()[i][j].getPiece().getColor().toString() +" || ");
 			}
-			
-		} else
-			return true;
+			System.out.print("\n");
+		}
 		
 		this.currentPlayer = otherPlayer(this.currentPlayer);
 		return true;
@@ -194,10 +198,13 @@ public final class Match {
 		}
 		else 
 		{
-			if(!end) return false;
+			if(this.field.isFull()) {
+				win(end);
+				return true;
+			}
+			else
+				return false;
 		}
-		win(end);
-		return true;
 	}
 	
 	public void win(boolean win){

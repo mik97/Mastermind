@@ -144,7 +144,5 @@ class Player_Test
 		P2.makeCombination();
 		P1.insertCombination();
 		P2.isTheCorrectCombination(mfield.getCellList(0));
-		
 	}
-	
 }

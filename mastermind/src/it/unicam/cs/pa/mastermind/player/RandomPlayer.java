@@ -112,17 +112,17 @@ public class RandomPlayer extends Player
 
 	@Override
 	public boolean makeCombination() {
-		Cell [] combination = new Cell[field.getColumns()];
+		Cell cell;
 		List<Color>color= Arrays.asList(Color.values());
 		Random rand = new Random();
 		Color a = null;
 		
-		for(int i = 0; i<field.getColumns();i++)
+		for(int i = 0; i < field.getColumns();i++)
 		{
 			a = color.get(rand.nextInt(color.size()));
-			combination[i]= new Cell();
-			combination[i].setPiece(new Piece(i+1, a));
-			this.combination.add(combination[i]);
+			cell = new Cell();
+			cell.setPiece(new Piece(i+1, a));
+			this.combination.add(cell);
 		}
 		if (this.combination.isEmpty()) return false;
 		return true;

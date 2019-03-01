@@ -61,6 +61,10 @@ public class MatchField {
 		return false;
 	}
 	
+	public Cell[][] getField() {
+		return this.field;
+	}
+	
 	private boolean initCheckup() {
 		return this.initialized;
 	}
@@ -127,6 +131,24 @@ public class MatchField {
 		return false;
 		
 	}
+
+	public boolean isFull() {
+		int count = 0;
+		
+		for(int i = 0; i < getRows(); i++) {
+			for(int j = 0; j < getColumns(); j++) {
+				if(!field[i][j].isEmpty() && j == getColumns() - 1) {
+					count++;
+				}
+			}
+		}
+		
+		if(count == getRows()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 //	public List<Cell> getCellList(List<Cell> cell, int i){
 //		List<Cell> cells = new ArrayList<>();
@@ -154,7 +176,7 @@ public class MatchField {
 	public int getRow() {
 		for(int i = 0; i < getRows(); i++) {
 			for(int j = 0; j < getColumns(); j++) {
-				if(field[i][j].isEmpty()) {
+				if(field[i][j].isEmpty() || i == getRows() - 1) {
 					return i;
 				} else {
 					continue;

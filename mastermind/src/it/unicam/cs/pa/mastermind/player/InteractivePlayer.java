@@ -32,8 +32,6 @@ public class InteractivePlayer extends Player {
 	private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private PrintStream out = System.out;
 
-	
-
 	public PlayerAction selectAction() throws InternalException,IllegalRoleActionException{
 		
 		System.out.println("Available Actions:\n");
@@ -56,12 +54,10 @@ public class InteractivePlayer extends Player {
 		    }
 		    catch (IllegalRoleActionException e)
 			{
-			 System.out.println(e.toString());
-			
+		    	System.out.println(e.toString());
 			}
 				
-				return this.action;
-
+			return this.action;
 	}
 
 	public InteractivePlayer(String name, Role role) {
@@ -109,7 +105,14 @@ public class InteractivePlayer extends Player {
 	
 	@Override
 	public boolean insertCombination() {
-		List<Color> colors = Utils.insertColor(in, out, this.field.getColumns());
+		List<Color> colors = new ArrayList<>();
+		
+		for(int i = 0; i < this.field.getColumns(); i++) {
+			colors.add(Utils.insertColor(in, out));
+		}
+		
+		this.replacePiece();
+		
 		List<AbstractPiece> pieces = new ArrayList<>();
 		
 		PieceFactory pieceFactory = PieceFactory.getInstance();
@@ -126,6 +129,18 @@ public class InteractivePlayer extends Player {
 		return false;
 	}
 	
+	private void replacePiece() {
+		String choose = Utils.doInput(in, out, "Do you want to continue? (y/n)",
+				x -> x.equals("y") || x.equals("n"), String::valueOf);
+		
+		if(choose.equals("n")) {
+			int toRemove = Utils.doInput(in, out, "Insert the position of the piece that you want to remove (start from 0)",
+					x -> x >= 0 && x <= this.rule.getFieldSize().getColumn(), Integer::parseInt);
+			AbstractPiece piece = new Piece(toRemove, Utils.insertColor(in, out));
+			this.rule.remove(toRemove, piece);
+		}
+	}
+	
 	@Override
 	public boolean makeCombination() 
 	{
@@ -140,7 +155,6 @@ public class InteractivePlayer extends Player {
 		
 			combination.add(cell);
 		}
-	
 	}
 		return true;
 }
@@ -163,6 +177,4 @@ public class InteractivePlayer extends Player {
 		}
 		return false;
 	}
-	
-
 }

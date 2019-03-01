@@ -47,42 +47,42 @@ public class DefaultRuleSet implements RuleSet
 		return fieldSize;
 		
 	}
-	@Override
-	public void Switch(int posIn, int posFin)// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
-	{
-		
-		this.checkField();
-		
-		List<Cell> cell = field.getCellList(currentLine);
-		AbstractPiece a ;
-		AbstractPiece b;
-		
-		a = cell.get(posIn).pop();
-		b = cell.get(posFin).pop();
-		
-		cell.get(posIn).setPiece(b);
-		cell.get(posFin).setPiece(a);
-	}
+//	@Override
+//	public void Switch(int posIn, int posFin)// quando finisce una combinazione se ci sono colori corretti in pos errate permette di scambiare i colori di posto
+//	{
+//		
+//		this.checkField();
+//		
+//		List<Cell> cell = field.getCellList(currentLine);
+//		AbstractPiece a ;
+//		AbstractPiece b;
+//		
+//		a = cell.get(posIn).pop();
+//		b = cell.get(posFin).pop();
+//		
+//		cell.get(posIn).setPiece(b);
+//		cell.get(posFin).setPiece(a);
+//	}
 
 	@Override
-	public void Remove(int Target)	
-	{
-		this.checkField();
-		
-		List<Cell> cell = field.getCellList(currentLine);
-		cell.get(Target).pop();
-		
-		
-	}
+//	public void remove(int Target)	
+//	{
+//		this.checkField();
+//		
+//		List<Cell> cell = field.getCellList(currentLine);
+//		cell.get(Target).pop();
+//		
+//		
+//	}
 	
-	public void Remove(int Target,Piece newPiece)//utile se in caso di errore di inserimento.
+	public void remove(int target, AbstractPiece newPiece)//utile se in caso di errore di inserimento.
 	{
 		this.checkField();
 		
 		List<Cell> cell = field.getCellList(currentLine);
-		cell.get(Target).pop();
-		cell.get(Target).setPiece(newPiece);
-		cell.get(Target).setStatus(CellStatus.FULL);
+		cell.get(target).pop();
+		cell.get(target).setPiece(newPiece);
+		cell.get(target).setStatus(CellStatus.FULL);
 	}
 
 
@@ -108,20 +108,18 @@ public class DefaultRuleSet implements RuleSet
 	public boolean isValidAction(PlayerAction V) 
 	{
 		if(V.equals(PlayerAction.MakeCombination) && this.field.getRow() !=0) return false;
+		if(V.equals(PlayerAction.IsTheCorrectCombination) && this.field.getRow() == 0) return false;
 		
 		if (this.playerActionMap.containsValue(V)==  true)
 			return true;
 		else
 			return false;
-
-		
 	}
 	
 	public int getCurrentLine()
 	{
 		return currentLine;
 	}
-
 
 
 	public HashMap<Integer, PlayerAction> getPlayerActionMap() 
