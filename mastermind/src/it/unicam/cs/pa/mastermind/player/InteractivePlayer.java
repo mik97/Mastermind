@@ -151,13 +151,15 @@ public class InteractivePlayer extends Player {
 		combination.stream().forEach(x-> System.out.print(x.getPiece().getColor()));
 		String choice = Utils.doInput(in, out, "\n Is the correct combination ? : y/n", (x)-> x.equals("y") || x.equals("n"),String::valueOf);
 		
-		if(choice == "y")return true;
-		else if(choice == "n")
-		{
-			int correct = Utils.doInput(in, out, "how many colors are correct ?",(x) -> x >= 0 && x <= field.getColumns(), Integer::parseInt);
-			int Wrong = Utils.doInput(in, out, "how many colors are wrong ?",(x) -> x >= 0 && x <= field.getColumns(), Integer::parseInt);
+		if(choice.contentEquals("y"))return true;
+		else 
+		{	if(choice.contentEquals("n")) 
+			{
+			int correct = Utils.doInput(in, out, "how many colors are correct ?",(x) -> x >= 0 && x <= rule.getFieldSize().getColumn(), Integer::parseInt);
+			int Wrong = Utils.doInput(in, out, "how many colors are wrong ?",(x) -> x >= 0 && x <= rule.getFieldSize().getColumn(), Integer::parseInt);
 			System.out.println("there are: "+correct+" corrct colors \n"+" and "+Wrong+" wrong colors");
 			return false;
+			}
 		}
 		return false;
 	}

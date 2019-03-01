@@ -26,7 +26,7 @@ public class RandomPlayer extends Player
 {
 	
 	private PlayerAction secondaryAction;
-	
+	private int timeIstant = 0;
 //	public  RandomPlayer(String name,Role role,InputStream in, PrintStream out) 
 //	{   super(name,role,in,out);
 //		
@@ -68,8 +68,26 @@ public class RandomPlayer extends Player
 	{
 		return secondaryAction;
 	}
+	
 	public PlayerAction selectAction() 
 	{
+		if(this.role.equals(Role.CODEBREAKER))
+		{	timeIstant++;
+			return action;
+		}
+		
+		if(this.role.equals(Role.CODEMAKER))
+		{
+			if(timeIstant == 0)
+			{
+				timeIstant++;
+				return action;
+			}
+			else 
+			{
+				return this.getSecondaryAction();
+			}
+		}
 		return action;
 	}
 	
@@ -118,7 +136,7 @@ public class RandomPlayer extends Player
 		if(pPosition != null)
 		{
 			System.out.println("There are " + pPosition.get(0) + " pieces in the correct position");
-			System.out.println("There are " + pPosition.get(1) + " pieces in the wrong position");
+			System.out.println("There are " + pPosition.get(1) + " pieces in the wrong position\n");
 		}
 		
 		if(pPosition.get(0) == 4) {
