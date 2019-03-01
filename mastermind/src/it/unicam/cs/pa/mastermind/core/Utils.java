@@ -93,6 +93,7 @@ public  class Utils
 	}
 	
 	public static void printField(PrintStream out, MatchField field) {
+		if(field != null) {
 		for(int i = 0; i < field.getRows(); i++) {
 			for(int j = 0; j < field.getColumns(); j++) {
 				if(field.getField()[i][j].getPiece().getColor() == null)
@@ -103,5 +104,6 @@ public  class Utils
 			out.print("\n");
 		}
 		out.print("\n\n");
+		}
 	}
 }
