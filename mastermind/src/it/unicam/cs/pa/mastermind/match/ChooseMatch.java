@@ -93,7 +93,7 @@ public class ChooseMatch {
 	}
 	
 	private static Integer selectFirstPlayer(Player p1, Player p2) {
-		if(p1.getRole() == Role.CODEMAKER)
+		if(p1.getRole().equals(Role.CODEMAKER))
 			return 0;
 		else
 			return 1;

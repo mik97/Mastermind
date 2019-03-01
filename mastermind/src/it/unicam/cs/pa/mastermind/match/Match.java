@@ -153,16 +153,6 @@ public final class Match {
 			doAction(this.players[currentPlayer].selectAction());
 		}
 		
-		for(int i = 0; i < this.field.getRows(); i++) {
-			for(int j = 0; j < this.field.getColumns(); j++) {
-				if(this.field.getField()[i][j].getPiece().getColor() == null)
-					System.out.print("|| null || ");
-				else
-					System.out.print("|| " + this.field.getField()[i][j].getPiece().getColor().toString() +" || ");
-			}
-			System.out.print("\n");
-		}
-		
 		this.currentPlayer = otherPlayer(this.currentPlayer);
 		return true;
 	}

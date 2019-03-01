@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.mastermind.player;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.stream.Stream;
 
 import it.unicam.cs.pa.mastermind.core.MatchField;
 import it.unicam.cs.pa.mastermind.core.PieceFactory;
+import it.unicam.cs.pa.mastermind.core.Utils;
 import it.unicam.cs.pa.mastermind.core.Cell;
 import it.unicam.cs.pa.mastermind.exception.IllegalIdArgument;
 import it.unicam.cs.pa.mastermind.piece.AbstractPiece;
@@ -27,10 +29,7 @@ public class RandomPlayer extends Player
 	
 	private PlayerAction secondaryAction;
 	private int timeIstant = 0;
-//	public  RandomPlayer(String name,Role role,InputStream in, PrintStream out) 
-//	{   super(name,role,in,out);
-//		
-//	}
+	private PrintStream out = System.out;
 	
 	public  RandomPlayer(String name,Role role) 
 	{
@@ -71,6 +70,8 @@ public class RandomPlayer extends Player
 	
 	public PlayerAction selectAction() 
 	{
+		Utils.printField(out, this.field);
+		
 		if(this.role.equals(Role.CODEBREAKER))
 		{	timeIstant++;
 			return action;

@@ -30,47 +30,16 @@ public class AlternativeRuleset implements RuleSet
 		
 		return playerActionMap;
 	}
-
-
-	@Override
-	public void Switch(int posIn, int posFin) 
-	{
-		
-		this.checkField();
-		int line = currentLine ;
-		
-		List<Cell> cell = field.getCellList(--line);
-		
-		AbstractPiece a ;
-		AbstractPiece b;
-		
-		a = cell.get(posIn).pop();
-		b = cell.get(posFin).pop();
-		
-		cell.get(posIn).setPiece(b);
-		cell.get(posFin).setPiece(a);
-	}
-
-	@Override
-	public void Remove(int Target)
-	{
-		this.checkField();
-		int a = currentLine ;
-		
-		List<Cell> cell = field.getCellList(--a);
-		cell.get(Target).pop();
-		
-	}
 	
-	public void Remove(int Target,Piece newPiece)
+	public void remove(int target, AbstractPiece newPiece)
 	{
 		this.checkField();
 		int a = currentLine ;
 		
 		List<Cell> cell = field.getCellList(--a);
-		cell.get(Target).pop();
-		cell.get(Target).setPiece(newPiece);
-		cell.get(Target).setStatus(CellStatus.FULL);
+		cell.get(target).pop();
+		cell.get(target).setPiece(newPiece);
+		cell.get(target).setStatus(CellStatus.FULL);
 	}
 	
 	private boolean checkSize(Size fieldSize) 

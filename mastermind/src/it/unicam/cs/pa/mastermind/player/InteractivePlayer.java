@@ -33,7 +33,7 @@ public class InteractivePlayer extends Player {
 	private PrintStream out = System.out;
 
 	public PlayerAction selectAction() throws InternalException,IllegalRoleActionException{
-		
+		Utils.printField(out, this.field);
 		System.out.println("Available Actions:\n");
 		super.getRule().getPlayerActionMap().entrySet().forEach(i -> out.println(i.getKey() + " - " + i.getValue()));
 		PlayerAction y = Utils.doInput(in, out, "choose an action", this.rule::isValidAction, PlayerAction::valueOf);
@@ -134,10 +134,15 @@ public class InteractivePlayer extends Player {
 				x -> x.equals("y") || x.equals("n"), String::valueOf);
 		
 		if(choose.equals("n")) {
-			int toRemove = Utils.doInput(in, out, "Insert the position of the piece that you want to remove (start from 0)",
-					x -> x >= 0 && x <= this.rule.getFieldSize().getColumn(), Integer::parseInt);
-			AbstractPiece piece = new Piece(toRemove, Utils.insertColor(in, out));
-			this.rule.remove(toRemove, piece);
+			int piecesToReplace = Utils.doInput(in, out, "How many pieces do you want to replace? (0-"+this.field.getColumns()+")",
+					x -> x >= 0 || x <= this.field.getColumns(), Integer::parseInt);
+			
+			for(int i = 0; i < piecesToReplace; i++) {
+				int toRemove = Utils.doInput(in, out, "Insert the position of the piece that you want to remove (start from 0)",
+						x -> x >= 0 && x <= this.rule.getFieldSize().getColumn(), Integer::parseInt);
+				AbstractPiece piece = new Piece(toRemove, Utils.insertColor(in, out));
+				this.rule.remove(toRemove, piece);
+			}
 		}
 	}
 	

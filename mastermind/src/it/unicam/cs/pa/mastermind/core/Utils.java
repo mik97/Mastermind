@@ -91,4 +91,17 @@ public  class Utils
 		color = doInput(in, out, "" ,(x) -> x >= 0 && x <= Color.values().length-1, Integer::parseInt);
 		return Color.getColor(color);
 	}
+	
+	public static void printField(PrintStream out, MatchField field) {
+		for(int i = 0; i < field.getRows(); i++) {
+			for(int j = 0; j < field.getColumns(); j++) {
+				if(field.getField()[i][j].getPiece().getColor() == null)
+					out.print("||   || ");
+				else
+					out.print("|| " + field.getField()[i][j].getPiece().getColor().toString() +" || ");
+			}
+			out.print("\n");
+		}
+		out.print("\n\n");
+	}
 }
