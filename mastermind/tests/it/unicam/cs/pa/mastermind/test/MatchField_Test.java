@@ -35,12 +35,6 @@ class MatchField_Test {
 	}
 	
 	@Test
-	void testSetPieces() {
-		testInitMatchField();
-		mfield.setPieces();
-	}
-	
-	@Test
 	void testGetRows() {
 		testInitMatchField();
 		assertTrue(mfield.getRows() == 7);

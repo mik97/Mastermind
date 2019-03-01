@@ -16,7 +16,6 @@ public class MatchField {
 	
 	private Cell field[][];
 	private Size size;
-	private int pieces;
 	
 	public MatchField() {
 		this.initialized = false;
@@ -42,23 +41,14 @@ public class MatchField {
 		}
 	}
 	
-	public void setPieces(){
-		initCheckup();
-		long empty = getEmptyCells().stream().filter(cell -> cell.isEmpty()).count();
-		pieces += empty;
-	}
-	
 	public boolean insert(List<AbstractPiece> piece) {
 		initCheckup();
-		if(pieces <= getRows()*getColumns()) {
-			if(checkInsert(getCellList(getRow()), getRow())) {
+		
+		if(checkInsert(getCellList(getRow()), getRow())) {
 				insertPiece(getCellList(getRow()), piece);
 				return true;
 			}
 			return false;
-		}
-		
-		return false;
 	}
 	
 	public Cell[][] getField() {
@@ -77,18 +67,6 @@ public class MatchField {
 	public int getColumns() {
 		initCheckup();
 		return this.size.getColumn();
-	}
-	
-	public List<Cell> getEmptyCells() {
-		List<Cell> cell = new ArrayList<>();
-		
-		for(int i = 0; i < getRows(); i++) {
-			for(int j = 0; j < getColumns(); j++) {
-				cell.add(field[i][j]);
-			}
-		}
-		
-		return cell;
 	}
 	
 	public List<Cell> getCellList(int row) {
@@ -150,15 +128,6 @@ public class MatchField {
 		}
 	}
 	
-//	public List<Cell> getCellList(List<Cell> cell, int i){
-//		List<Cell> cells = new ArrayList<>();
-//
-//		for(int x = 0; x < getColumns(); x++) {
-//			cells.add(cell.get(i)[x]);
-//		}
-//		
-//		return cells;
-//	}
 
 	public void clear() {
 		for(int i = 0; i < getRows(); i++) {
@@ -167,10 +136,6 @@ public class MatchField {
 			}
 		}
 		
-	}
-
-	public int getPieces() {
-		return this.pieces;
 	}
 	
 	public int getRow() {

@@ -87,11 +87,7 @@ public final class Match {
 
 			this.firstPlayer = getObj(p.getOrDefault("firstplayer", 0), Integer.class);
 			
-			if(this.players[firstPlayer].getRole().equals(Role.CODEMAKER))
-				this.currentPlayer = this.firstPlayer;
-			else
-				this.currentPlayer = otherPlayer(firstPlayer);
-			
+			setCurrentPlayer();			
 			
 			if(currentPlayer < 0 || currentPlayer > 1)
 				throw new IllegalArgumentException("" + currentPlayer 
@@ -105,6 +101,13 @@ public final class Match {
 		}
 		
 		return false;
+	}
+	
+	private void setCurrentPlayer() {
+		if(this.players[firstPlayer].getRole().equals(Role.CODEMAKER))
+			this.currentPlayer = this.firstPlayer;
+		else
+			this.currentPlayer = otherPlayer(firstPlayer);
 	}
 	
 	/**
