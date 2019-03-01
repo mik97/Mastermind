@@ -15,11 +15,10 @@ import it.unicam.cs.pa.mastermind.player.PlayerAction;
 
 public interface RuleSet 
 {
-	public abstract int getCurrentLine();
-	public abstract Size getFieldSize();
-	public abstract void  setField(MatchField field) ;
+	public abstract int getCurrentLine(); 
+	public abstract Size getFieldSize(); 
+	public abstract void  setField(MatchField field) ; 
 	public abstract HashMap<Integer, PlayerAction> getPlayerActionMap();
-	public  abstract boolean  checkField();
-	public abstract void remove(int target, AbstractPiece newPiece);
-	public  abstract boolean isValidAction(PlayerAction action);
+	public  abstract boolean checkField(); // controlla se il filed è pieno 
+	public  abstract boolean isValidAction(PlayerAction action); // verifica che un azione selezionata da un giocatore  sia valida 
 }

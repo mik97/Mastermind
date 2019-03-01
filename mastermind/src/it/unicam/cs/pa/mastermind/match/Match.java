@@ -195,7 +195,7 @@ public final class Match {
 		}
 		else 
 		{
-			if(this.field.isFull()) {
+			if(this.field.isFull()|| end) {
 				win(end);
 				return true;
 			}

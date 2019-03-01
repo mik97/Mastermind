@@ -43,8 +43,7 @@ class SingleTest {
 		
 		zanuf.makeCombination();
 		fZappa.insertCombination();
-		zanuf.isTheCorrectCombination(field.getCellList(0));
-		
+		assertTrue(zanuf.isTheCorrectCombination(field.getCellList(0)));
 	}
 
 }

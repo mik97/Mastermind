@@ -24,14 +24,15 @@ public abstract class Player
 	protected MatchField field;
 	protected List<Cell> combination;
 
-	public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException;
-	public abstract void init(int id, MatchField field, RuleSet rule);
-	public abstract boolean insertCombination();
-	public abstract boolean makeCombination();
-	public abstract boolean isTheCorrectCombination(List<Cell> comb);
+	public abstract PlayerAction selectAction() throws InternalException, IllegalRoleActionException; // consente al giocatore di selezinare una azione da eseguire
+	public abstract void init(int id, MatchField field, RuleSet rule); // inizializz il giocatore
+	public abstract boolean insertCombination(); // inserisce una combinazione di colori nel field
+	public abstract boolean makeCombination(); //  crea la combinazione segreta.
+	public abstract boolean isTheCorrectCombination(List<Cell> comb); // veriica se la combinazione inserita dal rivale è corretta
 	
 	
-	public void startMatch() {
+	public void startMatch()  // stampa a video l'id del gioctore
+	{
 		System.out.println("My id is: " + this.id);
 	}
 	

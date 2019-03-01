@@ -64,7 +64,7 @@ public class DefaultRuleSet implements RuleSet
 //		cell.get(posFin).setPiece(a);
 //	}
 
-	@Override
+	
 //	public void remove(int Target)	
 //	{
 //		this.checkField();
@@ -75,18 +75,7 @@ public class DefaultRuleSet implements RuleSet
 //		
 //	}
 	
-	public void remove(int target, AbstractPiece newPiece)//utile se in caso di errore di inserimento.
-	{
-		this.checkField();
-		
-		List<Cell> cell = field.getCellList(currentLine);
-		cell.get(target).pop();
-		cell.get(target).setPiece(newPiece);
-		cell.get(target).setStatus(CellStatus.FULL);
-	}
 
-
-		
 	@Override
 	public boolean checkField() //controlla se il Field è pieno, in caso sia pieno ritorna true , se e false ritorna la  riga corrente
 	{

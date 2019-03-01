@@ -31,16 +31,6 @@ public class AlternativeRuleset implements RuleSet
 		return playerActionMap;
 	}
 	
-	public void remove(int target, AbstractPiece newPiece)
-	{
-		this.checkField();
-		int a = currentLine ;
-		
-		List<Cell> cell = field.getCellList(--a);
-		cell.get(target).pop();
-		cell.get(target).setPiece(newPiece);
-		cell.get(target).setStatus(CellStatus.FULL);
-	}
 	
 	private boolean checkSize(Size fieldSize) 
 	{
@@ -96,4 +86,9 @@ public class AlternativeRuleset implements RuleSet
 		this.field = field;
 		
 	}
+
+	
+
 }
+
+

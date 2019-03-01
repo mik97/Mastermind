@@ -33,7 +33,7 @@ public  class Utils
 	 * @return
 	 * @throws InternalException
 	 */
-	public static <T> T doInput(BufferedReader in, PrintStream out, String request, Predicate<T> condition, Function<String, T> readFun)throws InternalException
+	public static <T> T doInput(BufferedReader in, PrintStream out, String request, Predicate<T> condition, Function<String, T> readFun)throws InternalException // utilizzato per effettuare input da tastiera 
 	{
 		while (true)
 		{
